@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UBEYDULLAH DOĞAN // PORTFOLIO</title>
+<meta name="description" content="Ubeydullah Doğan - Çok yönlü teknik operatör ve zanaatkar portfolyosu">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #00f0ff;
+    --magenta: #ff2a6d;
+    --yellow: #f9f002;
+    --purple: #b537f2;
+    --green: #7dff8a;
+    --bg: #05060f;
+    --panel: rgba(10, 14, 28, 0.72);
+    --line: rgba(0, 240, 255, 0.22);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body { background: var(--bg); color: #d7e4ea; font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+  .tech { font-family: 'Orbitron', sans-serif; }
+  .mono { font-family: 'Share Tech Mono', monospace; }
+
+  /* ---- arka plan ---- */
+  #bgCanvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -3; opacity: 0.12; }
+  .bg-glow { position: fixed; inset: 0; z-index: -2; pointer-events: none;
+    background: radial-gradient(600px 400px at 85% 12%, rgba(255,42,109,0.10), transparent 70%),
+                radial-gradient(700px 500px at 10% 80%, rgba(0,240,255,0.08), transparent 70%); }
+  .scanlines { position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0.35;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.12) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; }
+  .vignette { position: fixed; inset: 0; z-index: 59; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(2,3,8,0.7) 100%); }
+
+  /* ---- neon ---- */
+  .neon-c { color: var(--cyan); text-shadow: 0 0 12px rgba(0,240,255,0.65); }
+  .neon-m { color: var(--magenta); text-shadow: 0 0 12px rgba(255,42,109,0.65); }
+  .neon-y { color: var(--yellow); text-shadow: 0 0 12px rgba(249,240,2,0.5); }
+  .panel { background: var(--panel); border: 1px solid var(--line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); position: relative; }
+  .panel::before, .panel::after { content: ''; position: absolute; width: 14px; height: 14px; pointer-events: none; }
+  .panel::before { top: -1px; left: -1px; border-top: 2px solid var(--cyan); border-left: 2px solid var(--cyan); }
+  .panel::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--cyan); border-right: 2px solid var(--cyan); }
+
+  .clip-btn { clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+
+  /* ---- glitch ---- */
+  .glitch { position: relative; display: inline-block; }
+  .glitch::before, .glitch::after { content: attr(data-text); position: absolute; inset: 0; overflow: hidden; clip-path: inset(0 0 0 0); }
+  .glitch::before { color: var(--cyan); animation: glitchA 3.2s infinite steps(1); }
+  .glitch::after { color: var(--magenta); animation: glitchB 2.7s infinite steps(1); }
+  @keyframes glitchA { 0%,92%{transform:none;clip-path:inset(0 0 100% 0)} 93%{transform:translate(-3px,1px);clip-path:inset(12% 0 55% 0)} 95%{transform:translate(2px,-1px);clip-path:inset(60% 0 8% 0)} 97%{transform:none;clip-path:inset(0 0 100% 0)} }
+  @keyframes glitchB { 0%,90%{transform:none;clip-path:inset(0 0 100% 0)} 91%{transform:translate(3px,-1px);clip-path:inset(40% 0 30% 0)} 94%{transform:translate(-2px,2px);clip-path:inset(70% 0 3% 0)} 96%{transform:none;clip-path:inset(0 0 100% 0)} }
+
+  /* ---- nav ---- */
+  nav { border-bottom: 1px solid var(--line); background: rgba(4,6,15,0.9); backdrop-filter: blur(12px); }
+  .nav-link { color: #9fb2bd; font-size: 12.5px; letter-spacing: 1.5px; text-transform: uppercase; transition: 0.2s; position: relative; text-decoration: none; }
+  .nav-link:hover { color: var(--cyan); text-shadow: 0 0 10px rgba(0,240,255,0.7); }
+  .nav-link i { font-size: 10px; margin-right: 4px; }
+
+  /* ---- widget'lar ---- */
+  .widget { padding: 14px 16px; font-size: 11.5px; }
+  .widget h4 { font-family: 'Share Tech Mono', monospace; font-size: 10.5px; letter-spacing: 2px; color: var(--cyan); margin: 0 0 8px; opacity: 0.9; }
+  .stat-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+  .stat-row label { width: 86px; color: #8fa3ae; font-family: 'Share Tech Mono', monospace; font-size: 10px; }
+  .stat-bar { flex: 1; height: 6px; background: rgba(0,240,255,0.10); position: relative; overflow: hidden; }
+  .stat-bar i { position: absolute; inset: 0; transform-origin: left; background: linear-gradient(90deg, var(--cyan), var(--magenta)); animation: statPulse 3s ease-in-out infinite; }
+  @keyframes statPulse { 0%,100%{transform:scaleX(0.55)} 50%{transform:scaleX(0.92)} }
+  #termBody { height: 132px; overflow: hidden; font-family: 'Share Tech Mono', monospace; font-size: 11px; line-height: 1.65; color: #7ee787; text-shadow: 0 0 8px rgba(126,231,135,0.4); }
+  #termBody .cmd { color: var(--yellow); }
+  .cursor-blink { display: inline-block; width: 7px; height: 13px; background: #7ee787; vertical-align: -2px; animation: blink 0.9s steps(1) infinite; }
+  @keyframes blink { 50%{opacity:0} }
+
+  /* ---- ticker ---- */
+  .ticker-wrap { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(4,6,15,0.85); }
+  .ticker { display: flex; gap: 44px; white-space: nowrap; padding: 9px 0; animation: tickerMove 30s linear infinite; font-family: 'Share Tech Mono', monospace; font-size: 12px; letter-spacing: 2px; color: #6f8a96; width: max-content; }
+  .ticker b { color: var(--cyan); font-weight: 400; }
+  @keyframes tickerMove { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ---- hero ---- */
+  .id-chip { border: 1px solid rgba(0,240,255,0.25); background: rgba(0,240,255,0.05); padding: 10px 12px; min-width: 0; }
+  .id-chip .k { font-size: 9.5px; letter-spacing: 1.5px; color: #6f8a96; font-family: 'Share Tech Mono', monospace; }
+  .id-chip .v { font-size: 13px; font-weight: 600; color: #e8f6fa; font-family: 'Share Tech Mono', monospace; }
+
+  /* ---- avatar kart ---- */
+  .avatar-frame { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; }
+  .avatar-frame img { width: 100%; height: auto; display: block; transition: transform 0.4s; }
+  .avatar-frame:hover img { transform: scale(1.03); }
+  .avatar-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(5,6,15,0.6) 100%); pointer-events: none; }
+  .hud-corner { position: absolute; width: 26px; height: 26px; border-color: var(--cyan); opacity: 0.85; z-index: 5; pointer-events: none; }
+  .hud-tl { top: 10px; left: 10px; border-top: 2px solid; border-left: 2px solid; }
+  .hud-tr { top: 10px; right: 10px; border-top: 2px solid; border-right: 2px solid; }
+  .hud-bl { bottom: 10px; left: 10px; border-bottom: 2px solid; border-left: 2px solid; }
+  .hud-br { bottom: 10px; right: 10px; border-bottom: 2px solid; border-right: 2px solid; }
+
+  /* ---- bölüm başlıkları ---- */
+  .sec-title { font-size: clamp(20px, 3.4vw, 34px); font-weight: 900; letter-spacing: 2px; }
+  .sec-tag { font-family: 'Share Tech Mono', monospace; color: var(--magenta); font-size: 11px; letter-spacing: 3px; }
+
+  /* ---- kartlar ---- */
+  .neo-card { transition: 0.25s; }
+  .neo-card:hover { border-color: rgba(255,42,109,0.55); box-shadow: 0 0 26px rgba(255,42,109,0.18); transform: translateY(-3px); }
+  .neo-card:hover .card-icon { text-shadow: 0 0 22px currentColor; }
+
+  /* ---- timeline ---- */
+  .tl-line { position: absolute; left: 4px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--cyan), var(--magenta), transparent); }
+  @media (min-width: 768px) { .tl-line { left: 50%; } }
+  .tl-dot { position: absolute; left: 0; width: 13px; height: 13px; border-radius: 999px; background: var(--bg); border: 2px solid var(--cyan); box-shadow: 0 0 14px rgba(0,240,255,0.8); }
+  @media (min-width: 768px) { .tl-dot { left: 50%; transform: translateX(-50%); } }
+
+  /* ---- sertifika kartları ---- */
+  .cert-card { background: linear-gradient(160deg, rgba(0,240,255,0.05), rgba(10,14,28,0.9)); border: 1px solid rgba(0,240,255,0.16); border-radius: 8px; padding: 14px; transition: 0.25s; }
+  .cert-card:hover { border-color: rgba(0,240,255,0.4); box-shadow: 0 0 20px rgba(0,240,255,0.15); }
+  .cert-img-wrap { position: relative; overflow: hidden; border-radius: 6px; background: rgba(0,0,0,0.4); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .cert-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cert-placeholder { color: #3d5260; font-family: 'Share Tech Mono', monospace; font-size: 11px; text-align: center; padding: 30px; }
+  .cert-desc { margin-top: 10px; font-size: 11px; line-height: 1.6; color: #8fa3ae; font-family: 'Share Tech Mono', monospace; }
+
+  /* ---- galeri ---- */
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .gallery-item { position: relative; overflow: hidden; border-radius: 8px; border: 1px solid var(--line); cursor: pointer; aspect-ratio: 1; background: rgba(0,0,0,0.3); transition: 0.3s; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+  .gallery-item:hover img { transform: scale(1.05); }
+  .gallery-item.expanded { grid-column: span 2; grid-row: span 2; z-index: 10; box-shadow: 0 0 30px rgba(0,240,255,0.3); border-color: var(--cyan); }
+  .gallery-item.expanded img { transform: scale(1.08); }
+  .gallery-placeholder { color: #3d5260; font-family: 'Share Tech Mono', monospace; font-size: 10px; text-align: center; padding: 20px; display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; gap: 8px; }
+  .gallery-placeholder i { font-size: 28px; opacity: 0.4; }
+  .gallery-btn { padding: 10px 24px; font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px; border: 1px solid var(--line); background: rgba(0,240,255,0.05); color: #9fb2bd; cursor: pointer; transition: 0.2s; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }
+  .gallery-btn:hover { color: var(--cyan); border-color: var(--cyan); background: rgba(0,240,255,0.12); }
+  .gallery-btn.active { color: #031015; background: var(--cyan); border-color: var(--cyan); }
+
+  /* ---- modal (galeri büyütme) ---- */
+  #galleryModal { position: fixed; inset: 0; z-index: 90; background: rgba(2,3,8,0.94); display: none; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(6px); }
+  #galleryModal.open { display: flex; }
+  #galleryModal img { max-width: 92vw; max-height: 88vh; border-radius: 8px; border: 2px solid var(--cyan); box-shadow: 0 0 40px rgba(0,240,255,0.3); }
+
+  /* ---- scrollbar ---- */
+  ::-webkit-scrollbar { width: 9px; }
+  ::-webkit-scrollbar-track { background: #060810; }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--cyan), var(--magenta)); border-radius: 4px; }
+  ::selection { background: rgba(255,42,109,0.55); color: #fff; }
+
+  /* ---- mobil ---- */
+  @media (max-width: 768px) {
+    nav .lg-links { display: none; }
+    .gallery-item.expanded { grid-column: span 1; grid-row: span 1; }
+    .id-chip .v { font-size: 10.5px; }
+  }
+  @media (max-width: 520px) {
+    h1 .tech { letter-spacing: 1px; }
+  }
+
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+<div class="bg-glow"></div>
+<div class="scanlines"></div>
+<div class="vignette"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="fixed top-0 left-0 w-full z-50">
+  <div style="max-width: 80rem; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; height: 60px;">
+    <a href="#" class="tech" style="font-weight: 700; letter-spacing: 0.15em; font-size: 16px; color: var(--cyan); text-shadow: 0 0 14px rgba(0,240,255,0.7); text-decoration: none;">
+      UBEYDULLAH<span style="color: var(--magenta);">_</span>
+    </a>
+    <div class="lg-links" style="display: flex; gap: 28px; font-weight: 500;">
+      <a href="#about" class="nav-link mono"><i class="fa-solid fa-user"></i><span data-i18n="nav.about"></span></a>
+      <a href="#gallery" class="nav-link mono"><i class="fa-solid fa-images"></i><span data-i18n="nav.gallery"></span></a>
+      <a href="#documents" class="nav-link mono"><i class="fa-solid fa-file-shield"></i><span data-i18n="nav.documents"></span></a>
+      <a href="#skills" class="nav-link mono"><i class="fa-solid fa-gears"></i><span data-i18n="nav.skills"></span></a>
+      <a href="#experience" class="nav-link mono"><i class="fa-solid fa-briefcase"></i><span data-i18n="nav.experience"></span></a>
+      <a href="#contact" class="nav-link mono"><i class="fa-solid fa-satellite-dish"></i><span data-i18n="nav.contact"></span></a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div style="display: flex; padding: 4px; border: 1px solid var(--line); background: rgba(0,240,255,0.05);">
+        <button onclick="switchLang('tr')" id="btn-tr" class="mono" style="padding: 2px 8px; font-size: 12px; font-weight: 700; background: var(--cyan); color: #031015; border: none; cursor: pointer;">TR</button>
+        <button onclick="switchLang('de')" id="btn-de" class="mono" style="padding: 2px 8px; font-size: 12px; font-weight: 700; background: transparent; color: #6f8a96; border: none; cursor: pointer;">DE</button>
+        <button onclick="switchLang('en')" id="btn-en" class="mono" style="padding: 2px 8px; font-size: 12px; font-weight: 700; background: transparent; color: #6f8a96; border: none; cursor: pointer;">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header style="min-height: 100vh; display: flex; align-items: center; padding: 80px 20px 40px; position: relative;">
+  <div style="max-width: 80rem; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;" class="hero-grid">
+    <!-- Sol: kimlik -->
+    <div style="position: relative; z-index: 10;">
+      <div class="mono" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; margin-bottom: 24px; border: 1px solid rgba(255,42,109,0.4); background: rgba(255,42,109,0.07); color: var(--magenta); font-size: 10.5px; letter-spacing: 2px;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 8px var(--yellow); animation: blink 1.4s steps(1) infinite;"></span>
+        <span data-i18n="hero.badge"></span>
+      </div>
+      <h1 class="tech" style="font-weight: 900; line-height: 1.1; margin-bottom: 16px; font-size: clamp(30px, 5.4vw, 62px); letter-spacing: 2px;">
+        <span class="glitch" data-text="UBEYDULLAH">UBEYDULLAH</span><br>
+        <span class="glitch" data-text="DOĞAN" style="color: var(--cyan); text-shadow: 0 0 26px rgba(0,240,255,0.55);">DOĞAN</span>
+      </h1>
+      <p class="mono" style="margin-bottom: 32px; color: #8fa3ae; font-size: 13px; letter-spacing: 1px; line-height: 1.8; max-width: 560px;" data-i18n="hero.desc"></p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 36px; max-width: 32rem;" class="hero-chips">
+        <div class="id-chip"><span class="k" data-i18n="hero.chip_age"></span><span class="v" style="display: block;">28</span></div>
+        <div class="id-chip"><span class="k" data-i18n="hero.chip_height"></span><span class="v" style="display: block;">1.78 m</span></div>
+        <div class="id-chip"><span class="k" data-i18n="hero.chip_weight"></span><span class="v" style="display: block;">73 kg</span></div>
+        <div class="id-chip"><span class="k" data-i18n="hero.chip_license"></span><span class="v" style="display: block; color: var(--yellow);">A & B</span></div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+        <a href="#gallery" class="clip-btn tech" style="font-weight: 700; padding: 14px 28px; font-size: 14px; background: linear-gradient(120deg, var(--magenta), #c4156b); color: #fff; letter-spacing: 2px; box-shadow: 0 0 28px rgba(255,42,109,0.4); text-decoration: none;">
+          <i class="fa-solid fa-images" style="margin-right: 8px;"></i><span data-i18n="hero.btn_gallery"></span>
+        </a>
+        <a href="#contact" class="clip-btn tech" style="font-weight: 700; padding: 14px 28px; font-size: 14px; border: 1px solid var(--cyan); color: var(--cyan); background: rgba(0,240,255,0.06); letter-spacing: 2px; text-decoration: none;">
+          <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i><span data-i18n="hero.btn_contact"></span>
+        </a>
+      </div>
+    </div>
+    <!-- Sağ: avatar -->
+    <div style="position: relative;">
+      <div class="panel" style="padding: 10px;">
+        <div class="avatar-frame" style="position: relative;">
+          <div class="hud-corner hud-tl"></div><div class="hud-corner hud-tr"></div>
+          <div class="hud-corner hud-bl"></div><div class="hud-corner hud-br"></div>
+          <div class="mono" style="position: absolute; top: 12px; left: 48px; z-index: 10; font-size: 10px; letter-spacing: 2px; pointer-events: none; color: rgba(0,240,255,0.75);">AVATAR_HOLO // DIGITAL</div>
+          <div class="mono" style="position: absolute; top: 12px; right: 48px; z-index: 10; font-size: 10px; letter-spacing: 2px; pointer-events: none; color: rgba(255,42,109,0.8);">SCAN: ACTIVE</div>
+          <img src="assets/img/avatar.jpg" alt="Ubeydullah Doğan Avatar" loading="lazy">
+        </div>
+      </div>
+      <div class="mono" style="text-align: center; margin-top: 8px; font-size: 10px; letter-spacing: 2px; color: #3d5260;" data-i18n="hero.avatar_note"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker-wrap">
+  <div class="ticker" id="tickerRow">
+    <span><b>>></b> <span data-i18n="ticker.t1"></span></span>
+    <span><b>>></b> <span data-i18n="ticker.t2"></span></span>
+    <span><b>>></b> <span data-i18n="ticker.t3"></span></span>
+    <span><b>>></b> <span data-i18n="ticker.t4"></span></span>
+    <span><b>>></b> <span data-i18n="ticker.t5"></span></span>
+    <span><b>>></b> <span data-i18n="ticker.t6"></span></span>
+    <span><b>>></b> <span data-i18n="ticker.t7"></span></span>
+  </div>
+</div>
+
+<!-- ============ HAKKIMDA + WIDGET'LER ============ -->
+<section id="about" style="padding: 80px 20px; position: relative; background: rgba(8,11,22,0.5);">
+  <div style="max-width: 80rem; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 56px;">
+      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.01 — PROFILE.exe</div>
+      <h2 class="sec-title tech"><span data-i18n="about.title_1"></span> <span class="neon-m" data-i18n="about.title_2"></span></h2>
+    </div>
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 32px;" class="about-grid">
+      <div class="panel neo-card" style="padding: 32px; grid-column: span 1;">
+        <div style="font-size: 14px; line-height: 1.7; color: #b8c9d3;">
+          <p style="margin-bottom: 16px;" data-i18n="about.p1"></p>
+          <p style="margin-bottom: 16px;" data-i18n="about.p2"></p>
+          <p data-i18n="about.p3"></p>
+        </div>
+        <div class="mono" style="margin-top: 24px; padding-top: 16px; font-size: 12px; display: flex; justify-content: space-between; border-top: 1px solid var(--line); color: #5a7280;">
+          <span><i class="fa-solid fa-quote-left" style="margin-right: 8px;"></i>Ubeydullah Doğan</span>
+          <span class="neon-c" data-i18n="about.applicant"></span>
+        </div>
+      </div>
+      <!-- Widget sütunu -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div class="panel widget">
+          <h4><i class="fa-regular fa-clock" style="margin-right: 4px;"></i> CHRONO-UNIT</h4>
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span id="clock" class="mono neon-c" style="font-size: 26px; letter-spacing: 2px;">--:--:--</span>
+            <span class="mono" style="font-size: 10px; color: #5a7280;">TR / UTC+3</span>
+          </div>
+          <div class="mono" style="font-size: 10px; margin-top: 4px; color: #5a7280;" id="dateLine">----.--.--</div>
+        </div>
+        <div class="panel widget">
+          <h4><i class="fa-solid fa-microchip" style="margin-right: 4px;"></i> SYSTEM STATUS</h4>
+          <div class="stat-row"><label>SKILL.SYS</label><div class="stat-bar"><i style="animation-delay: 0s;"></i></div></div>
+          <div class="stat-row"><label>STAMINA</label><div class="stat-bar"><i style="animation-delay: .4s;"></i></div></div>
+          <div class="stat-row"><label>DISZIPLIN</label><div class="stat-bar"><i style="animation-delay: .8s;"></i></div></div>
+          <div class="stat-row"><label>MOTIVATION</label><div class="stat-bar"><i style="animation-delay: 1.2s;"></i></div></div>
+          <div class="mono" style="font-size: 9.5px; margin-top: 8px; color: #3d5260;" data-i18n="about.sys_nominal"></div>
+        </div>
+        <div class="panel widget">
+          <h4><i class="fa-solid fa-terminal" style="margin-right: 4px;"></i> BIO_TERMINAL</h4>
+          <div id="termBody"></div>
+        </div>
+        <div class="panel widget" style="text-align: center;" class="neo-card">
+          <i class="fa-brands fa-instagram" style="font-size: 40px; margin-bottom: 8px; color: var(--magenta); text-shadow: 0 0 18px rgba(255,42,109,0.6);"></i>
+          <div class="tech" style="font-weight: 700; font-size: 14px; margin-bottom: 4px;">INSTAGRAM</div>
+          <div class="mono" style="font-size: 12px; letter-spacing: 2px; margin-bottom: 12px;" class="neon-c">@UBEYDULLAHDOGAN44</div>
+          <div style="background: #fff; padding: 8px; border-radius: 4px; display: inline-block; margin: 0 auto 8px;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://instagram.com/UBEYDULLAHDOGAN44" alt="Instagram QR" style="width: 112px; height: 112px;">
+          </div>
+          <div class="mono" style="font-size: 10px; color: #5a7280;" data-i18n="about.qr_connect"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERİ ============ -->
+<section id="gallery" style="padding: 80px 20px;">
+  <div style="max-width: 80rem; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 56px;">
+      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.02 — GALLERY.img</div>
+      <h2 class="sec-title tech"><span data-i18n="gallery.title_1"></span> <span class="neon-c" data-i18n="gallery.title_2"></span></h2>
+      <p class="mono" style="font-size: 12px; margin-top: 16px; color: #5a7280;" data-i18n="gallery.hint"></p>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 40px; flex-wrap: wrap;">
+      <button class="gallery-btn active" onclick="filterGallery('all', this)" data-i18n="gallery.btn_all"></button>
+      <button class="gallery-btn" onclick="filterGallery('bamsi', this)" data-i18n="gallery.btn_bamsi"></button>
+      <button class="gallery-btn" onclick="filterGallery('me', this)" data-i18n="gallery.btn_me"></button>
+      <button class="gallery-btn" onclick="filterGallery('friends', this)" data-i18n="gallery.btn_friends"></button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Bamsı kategorisi -->
+      <div class="gallery-item" data-cat="bamsi" onclick="toggleExpand(this)">
+        <img src="assets/img/gallery/bamsi1.jpg" alt="Bamsı" loading="lazy">
+      </div>
+      <div class="gallery-item" data-cat="bamsi" onclick="toggleExpand(this)">
+        <img src="assets/img/gallery/bamsi2.jpg" alt="Bamsı" loading="lazy">
+      </div>
+      <div class="gallery-item" data-cat="bamsi" onclick="toggleExpand(this)">
+        <img src="assets/img/gallery/bamsi3.jpg" alt="Bamsı" loading="lazy">
+      </div>
+      <!-- Ben kategorisi -->
+      <div class="gallery-item" data-cat="me" onclick="toggleExpand(this)">
+        <img src="assets/img/profile.jpg" alt="Ubeydullah Doğan" loading="lazy">
+      </div>
+      <div class="gallery-item" data-cat="me" onclick="toggleExpand(this)">
+        <img src="assets/img/gallery/me2.jpg" alt="Ubeydullah Doğan" loading="lazy">
+      </div>
+      <div class="gallery-item" data-cat="me" onclick="toggleExpand(this)">
+        <img src="assets/img/gallery/me3.jpg" alt="Ubeydullah Doğan" loading="lazy">
+      </div>
+      <!-- Arkadaşlar kategorisi -->
+      <div class="gallery-item" data-cat="friends" onclick="toggleExpand(this)">
+        <img src="assets/img/gallery/friends1.jpg" alt="Ubeydullah Doğan ve arkadaşları" loading="lazy">
+      </div>
+      <div class="gallery-item" data-cat="friends" onclick="toggleExpand(this)">
+        <img src="assets/img/gallery/friends2.jpg" alt="Ubeydullah Doğan ve arkadaşları" loading="lazy">
+      </div>
+      <div class="gallery-item" data-cat="friends" onclick="toggleExpand(this)">
+        <img src="assets/img/gallery/friends3.jpg" alt="Ubeydullah Doğan ve arkadaşları" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERTİFİKALAR & EHLİYET ============ -->
+<section id="documents" style="padding: 80px 20px; background: rgba(8,11,22,0.5);">
+  <div style="max-width: 72rem; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 56px;">
+      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.03 — DOCS_ARCHIVE.enc</div>
+      <h2 class="sec-title tech"><span data-i18n="docs.title_1"></span> <span class="neon-c" data-i18n="docs.title_2"></span></h2>
+      <p class="mono" style="font-size: 12px; margin-top: 16px; color: #5a7280;" data-i18n="docs.hint"></p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+      <!-- Sertifika 1: Elektrik Montörlüğü -->
+      <div class="cert-card">
+        <div class="cert-img-wrap" onclick="openCertModal(this)">
+          <img src="assets/img/certificates/elektrik.jpg" alt="Elektrik Montörlüğü Belgesi" loading="lazy">
+        </div>
+        <h3 class="tech" style="font-weight: 700; font-size: 14px; margin: 12px 0 4px;" class="neon-c" data-i18n="docs.cert1_title"></h3>
+        <p class="mono" style="font-size: 10px; margin-bottom: 8px; color: #5a7280;" data-i18n="docs.cert1_sub"></p>
+        <div class="cert-desc" data-i18n="docs.cert1_desc"></div>
+      </div>
+      <!-- Sertifika 2: Sıhhi Tesisat -->
+      <div class="cert-card">
+        <div class="cert-img-wrap" onclick="openCertModal(this)">
+          <img src="assets/img/certificates/sihhi-tesisat.jpg" alt="Sıhhi Tesisat Sertifikası" loading="lazy">
+        </div>
+        <h3 class="tech" style="font-weight: 700; font-size: 14px; margin: 12px 0 4px; color: var(--cyan);" data-i18n="docs.cert2_title"></h3>
+        <p class="mono" style="font-size: 10px; margin-bottom: 8px; color: #5a7280;" data-i18n="docs.cert2_sub"></p>
+        <div class="cert-desc" data-i18n="docs.cert2_desc"></div>
+      </div>
+      <!-- Sertifika 3: YÖK Öğrenci Belgesi -->
+      <div class="cert-card">
+        <div class="cert-img-wrap" onclick="openCertModal(this)">
+          <img src="assets/img/certificates/yok-ogrenci.jpg" alt="YÖK Öğrenci Belgesi" loading="lazy">
+        </div>
+        <h3 class="tech" style="font-weight: 700; font-size: 14px; margin: 12px 0 4px; color: var(--cyan);" data-i18n="docs.cert3_title"></h3>
+        <p class="mono" style="font-size: 10px; margin-bottom: 8px; color: #5a7280;" data-i18n="docs.cert3_sub"></p>
+        <div class="cert-desc" data-i18n="docs.cert3_desc"></div>
+      </div>
+      <!-- Ehliyet -->
+      <div class="cert-card">
+        <div class="cert-img-wrap" onclick="openCertModal(this)">
+          <img src="assets/img/certificates/ehliyet.jpg" alt="Sürücü Ehliyeti" loading="lazy">
+        </div>
+        <h3 class="tech" style="font-weight: 700; font-size: 14px; margin: 12px 0 4px; color: var(--magenta);" data-i18n="docs.license_title"></h3>
+        <p class="mono" style="font-size: 10px; margin-bottom: 8px; color: #5a7280;" data-i18n="docs.license_sub"></p>
+        <div class="cert-desc" data-i18n="docs.license_desc"></div>
+      </div>
+      <!-- Sertifika 4: Gitar -->
+      <div class="cert-card">
+        <div class="cert-img-wrap" onclick="openCertModal(this)">
+          <img src="assets/img/certificates/gitar.jpg" alt="Gitar Eğitimi Sertifikası" loading="lazy">
+        </div>
+        <h3 class="tech" style="font-weight: 700; font-size: 14px; margin: 12px 0 4px; color: var(--yellow);" data-i18n="docs.cert4_title"></h3>
+        <p class="mono" style="font-size: 10px; margin-bottom: 8px; color: #5a7280;" data-i18n="docs.cert4_sub"></p>
+        <div class="cert-desc" data-i18n="docs.cert4_desc"></div>
+      </div>
+      <!-- Sertifika 5: Silahlı Özel Güvenlik -->
+      <div class="cert-card">
+        <div class="cert-img-wrap" onclick="openCertModal(this)">
+          <img src="assets/img/certificates/guvenlik.jpg" alt="Silahlı Özel Güvenlik Sertifikası" loading="lazy">
+        </div>
+        <h3 class="tech" style="font-weight: 700; font-size: 14px; margin: 12px 0 4px; color: var(--cyan);" data-i18n="docs.cert5_title"></h3>
+        <p class="mono" style="font-size: 10px; margin-bottom: 8px; color: #5a7280;" data-i18n="docs.cert5_sub"></p>
+        <div class="cert-desc" data-i18n="docs.cert5_desc"></div>
+      </div>
+      <!-- Sertifika 6: Askerlik Takdirname -->
+      <div class="cert-card">
+        <div class="cert-img-wrap" onclick="openCertModal(this)">
+          <img src="assets/img/certificates/askerlik.jpg" alt="Askerlik Takdirname" loading="lazy">
+        </div>
+        <h3 class="tech" style="font-weight: 700; font-size: 14px; margin: 12px 0 4px; color: var(--green);" data-i18n="docs.cert6_title"></h3>
+        <p class="mono" style="font-size: 10px; margin-bottom: 8px; color: #5a7280;" data-i18n="docs.cert6_sub"></p>
+        <div class="cert-desc" data-i18n="docs.cert6_desc"></div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top: 32px; padding: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;" class="mono" style="font-size: 11px; color: #5a7280;">
+      <div><b class="neon-c" data-i18n="docs.dob"></b> 24.04.1998</div>
+      <div><b class="neon-c" data-i18n="docs.nationality"></b> <span data-i18n="docs.nationality_val"></span></div>
+      <div><b class="neon-c" data-i18n="docs.verification"></b> TURKIYE.GOV.TR</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ YETENEKLER ============ -->
+<section id="skills" style="padding: 80px 20px;">
+  <div style="max-width: 72rem; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 56px;">
+      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.04 — SKILL_TREE.dll</div>
+      <h2 class="sec-title tech"><span data-i18n="skills.title_1"></span> <span class="neon-y" data-i18n="skills.title_2"></span></h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+      <div class="panel neo-card" style="padding: 24px;">
+        <i class="fa-solid fa-bolt card-icon" style="font-size: 28px; margin-bottom: 16px; color: var(--yellow);"></i>
+        <h4 class="tech" style="font-weight: 700; margin-bottom: 8px; font-size: 14px; letter-spacing: 1px;" data-i18n="skills.s1_title"></h4>
+        <p style="font-size: 12px; line-height: 1.6; color: #8fa3ae;" data-i18n="skills.s1_desc"></p>
+      </div>
+      <div class="panel neo-card" style="padding: 24px;">
+        <i class="fa-solid fa-wrench card-icon" style="font-size: 28px; margin-bottom: 16px; color: var(--cyan);"></i>
+        <h4 class="tech" style="font-weight: 700; margin-bottom: 8px; font-size: 14px; letter-spacing: 1px;" data-i18n="skills.s2_title"></h4>
+        <p style="font-size: 12px; line-height: 1.6; color: #8fa3ae;" data-i18n="skills.s2_desc"></p>
+      </div>
+      <div class="panel neo-card" style="padding: 24px;">
+        <i class="fa-solid fa-laptop-code card-icon" style="font-size: 28px; margin-bottom: 16px; color: var(--purple);"></i>
+        <h4 class="tech" style="font-weight: 700; margin-bottom: 8px; font-size: 14px; letter-spacing: 1px;" data-i18n="skills.s3_title"></h4>
+        <p style="font-size: 12px; line-height: 1.6; color: #8fa3ae;" data-i18n="skills.s3_desc"></p>
+      </div>
+      <div class="panel neo-card" style="padding: 24px;">
+        <i class="fa-solid fa-couch card-icon" style="font-size: 28px; margin-bottom: 16px; color: var(--magenta);"></i>
+        <h4 class="tech" style="font-weight: 700; margin-bottom: 8px; font-size: 14px; letter-spacing: 1px;" data-i18n="skills.s4_title"></h4>
+        <p style="font-size: 12px; line-height: 1.6; color: #8fa3ae;" data-i18n="skills.s4_desc"></p>
+      </div>
+      <div class="panel neo-card" style="padding: 24px;">
+        <i class="fa-solid fa-scissors card-icon" style="font-size: 28px; margin-bottom: 16px; color: var(--green);"></i>
+        <h4 class="tech" style="font-weight: 700; margin-bottom: 8px; font-size: 14px; letter-spacing: 1px;" data-i18n="skills.s5_title"></h4>
+        <p style="font-size: 12px; line-height: 1.6; color: #8fa3ae;" data-i18n="skills.s5_desc"></p>
+      </div>
+      <div class="panel neo-card" style="padding: 24px;">
+        <i class="fa-solid fa-industry card-icon" style="font-size: 28px; margin-bottom: 16px; color: #ff6b4a;"></i>
+        <h4 class="tech" style="font-weight: 700; margin-bottom: 8px; font-size: 14px; letter-spacing: 1px;" data-i18n="skills.s6_title"></h4>
+        <p style="font-size: 12px; line-height: 1.6; color: #8fa3ae;" data-i18n="skills.s6_desc"></p>
+      </div>
+      <div class="panel neo-card" style="padding: 24px;">
+        <i class="fa-solid fa-shield-halved card-icon" style="font-size: 28px; margin-bottom: 16px; color: #ff6b4a;"></i>
+        <h4 class="tech" style="font-weight: 700; margin-bottom: 8px; font-size: 14px; letter-spacing: 1px;" data-i18n="skills.s7_title"></h4>
+        <p style="font-size: 12px; line-height: 1.6; color: #8fa3ae;" data-i18n="skills.s7_desc"></p>
+      </div>
+      <div class="panel neo-card" style="padding: 24px;">
+        <i class="fa-solid fa-truck-ramp-box card-icon" style="font-size: 28px; margin-bottom: 16px; color: var(--green);"></i>
+        <h4 class="tech" style="font-weight: 700; margin-bottom: 8px; font-size: 14px; letter-spacing: 1px;" data-i18n="skills.s8_title"></h4>
+        <p style="font-size: 12px; line-height: 1.6; color: #8fa3ae;" data-i18n="skills.s8_desc"></p>
+      </div>
+      <div class="panel neo-card" style="padding: 24px;">
+        <i class="fa-solid fa-utensils card-icon" style="font-size: 28px; margin-bottom: 16px; color: var(--yellow);"></i>
+        <h4 class="tech" style="font-weight: 700; margin-bottom: 8px; font-size: 14px; letter-spacing: 1px;" data-i18n="skills.s9_title"></h4>
+        <p style="font-size: 12px; line-height: 1.6; color: #8fa3ae;" data-i18n="skills.s9_desc"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DENEYİM ============ -->
+<section id="experience" style="padding: 80px 20px; background: rgba(8,11,22,0.5);">
+  <div style="max-width: 56rem; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 56px;">
+      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.05 — FIELD_LOG.rec</div>
+      <h2 class="sec-title tech"><span data-i18n="exp.title_1"></span> <span class="neon-m" data-i18n="exp.title_2"></span></h2>
+    </div>
+    <div style="position: relative; padding-left: 40px;" class="exp-timeline">
+      <div class="tl-line"></div>
+
+      <!-- 1: Merinos İplik Fabrikası -->
+      <div style="position: relative; margin-bottom: 48px;">
+        <div class="tl-dot"></div>
+        <span class="mono" style="font-size: 11px; letter-spacing: 3px; display: block; margin-bottom: 4px; color: var(--cyan);" data-i18n="exp.e1_tag"></span>
+        <h3 class="tech" style="font-weight: 700; font-size: 17px;" data-i18n="exp.e1_title"></h3>
+        <p style="font-size: 12px; margin-top: 12px; line-height: 1.7; color: #8fa3ae;" data-i18n="exp.e1_desc"></p>
+      </div>
+
+      <!-- 2: Büyük sanayi makineleri -->
+      <div style="position: relative; margin-bottom: 48px;">
+        <div class="tl-dot" style="border-color: var(--magenta); box-shadow: 0 0 14px rgba(255,42,109,0.8);"></div>
+        <span class="mono" style="font-size: 11px; letter-spacing: 3px; display: block; margin-bottom: 4px; color: var(--magenta);" data-i18n="exp.e2_tag"></span>
+        <h3 class="tech" style="font-weight: 700; font-size: 17px;" data-i18n="exp.e2_title"></h3>
+        <p style="font-size: 12px; margin-top: 12px; line-height: 1.7; color: #8fa3ae;" data-i18n="exp.e2_desc"></p>
+      </div>
+
+      <!-- 3: Koltuk & mobilya tamiri -->
+      <div style="position: relative; margin-bottom: 48px;">
+        <div class="tl-dot"></div>
+        <span class="mono" style="font-size: 11px; letter-spacing: 3px; display: block; margin-bottom: 4px; color: var(--cyan);" data-i18n="exp.e3_tag"></span>
+        <h3 class="tech" style="font-weight: 700; font-size: 17px;" data-i18n="exp.e3_title"></h3>
+        <p style="font-size: 12px; margin-top: 12px; line-height: 1.7; color: #8fa3ae;" data-i18n="exp.e3_desc"></p>
+      </div>
+
+      <!-- 4: Döşeme ustalığı -->
+      <div style="position: relative; margin-bottom: 48px;">
+        <div class="tl-dot" style="border-color: var(--magenta); box-shadow: 0 0 14px rgba(255,42,109,0.8);"></div>
+        <span class="mono" style="font-size: 11px; letter-spacing: 3px; display: block; margin-bottom: 4px; color: var(--magenta);" data-i18n="exp.e4_tag"></span>
+        <h3 class="tech" style="font-weight: 700; font-size: 17px;" data-i18n="exp.e4_title"></h3>
+        <p style="font-size: 12px; margin-top: 12px; line-height: 1.7; color: #8fa3ae;" data-i18n="exp.e4_desc"></p>
+      </div>
+
+      <!-- 5: Tekstil & konfeksiyon -->
+      <div style="position: relative; margin-bottom: 48px;">
+        <div class="tl-dot"></div>
+        <span class="mono" style="font-size: 11px; letter-spacing: 3px; display: block; margin-bottom: 4px; color: var(--cyan);" data-i18n="exp.e5_tag"></span>
+        <h3 class="tech" style="font-weight: 700; font-size: 17px;" data-i18n="exp.e5_title"></h3>
+        <p style="font-size: 12px; margin-top: 12px; line-height: 1.7; color: #8fa3ae;" data-i18n="exp.e5_desc"></p>
+      </div>
+
+      <!-- 6: Japonya -->
+      <div style="position: relative; margin-bottom: 48px;">
+        <div class="tl-dot" style="border-color: var(--magenta); box-shadow: 0 0 14px rgba(255,42,109,0.8);"></div>
+        <span class="mono" style="font-size: 11px; letter-spacing: 3px; display: block; margin-bottom: 4px; color: var(--magenta);" data-i18n="exp.e6_tag"></span>
+        <h3 class="tech" style="font-weight: 700; font-size: 17px;" data-i18n="exp.e6_title"></h3>
+        <p style="font-size: 12px; margin-top: 12px; line-height: 1.7; color: #8fa3ae;" data-i18n="exp.e6_desc"></p>
+      </div>
+
+      <!-- 7: Malatya depremi -->
+      <div style="position: relative; margin-bottom: 48px;">
+        <div class="tl-dot"></div>
+        <span class="mono" style="font-size: 11px; letter-spacing: 3px; display: block; margin-bottom: 4px; color: var(--cyan);" data-i18n="exp.e7_tag"></span>
+        <h3 class="tech" style="font-weight: 700; font-size: 17px;" data-i18n="exp.e7_title"></h3>
+        <p style="font-size: 12px; margin-top: 12px; line-height: 1.7; color: #8fa3ae;" data-i18n="exp.e7_desc"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ İLETİŞİM ============ -->
+<section id="contact" style="padding: 64px 20px; text-align: center; position: relative; background: rgba(3,5,12,0.9); border-top: 1px solid var(--line);">
+  <div style="max-width: 42rem; margin: 0 auto;">
+    <div class="sec-tag" style="margin-bottom: 12px;">// SEC.06 — UPLINK</div>
+    <h2 class="sec-title tech" style="margin-bottom: 24px;"><span data-i18n="contact.title_1"></span> <span class="neon-c" data-i18n="contact.title_2"></span></h2>
+    <p style="font-size: 12px; line-height: 1.7; margin-bottom: 40px; color: #8fa3ae;" data-i18n="contact.desc"></p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px;">
+      <a href="https://wa.me/905302447448" target="_blank" class="panel neo-card" style="padding: 20px; text-decoration: none; display: block;">
+        <i class="fa-brands fa-whatsapp" style="font-size: 24px; margin-bottom: 8px; display: block; color: var(--green);"></i>
+        <span class="mono" style="font-size: 12px; color: #b8c9d3;">+90 530 244 74 48</span>
+      </a>
+      <a href="mailto:ubixdubi@gmail.com" class="panel neo-card" style="padding: 20px; text-decoration: none; display: block;">
+        <i class="fa-solid fa-envelope" style="font-size: 24px; margin-bottom: 8px; display: block; color: var(--cyan);"></i>
+        <span class="mono" style="font-size: 12px; color: #b8c9d3; word-break: break-all;">ubixdubi@gmail.com</span>
+      </a>
+      <a href="tel:+905302447448" class="panel neo-card" style="padding: 20px; text-decoration: none; display: block;">
+        <i class="fa-solid fa-phone" style="font-size: 24px; margin-bottom: 8px; display: block; color: #7dff8a;"></i>
+        <span class="mono" style="font-size: 12px; color: #b8c9d3;">+90 530 244 74 48</span>
+      </a>
+      <div class="panel" style="padding: 20px;">
+        <i class="fa-solid fa-location-dot" style="font-size: 24px; margin-bottom: 8px; display: block; color: var(--magenta);"></i>
+        <span class="mono" style="font-size: 12px; color: #b8c9d3;" data-i18n="contact.location"></span>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 28px; font-size: 20px; margin-bottom: 40px;">
+      <a href="https://instagram.com/UBEYDULLAHDOGAN44" target="_blank" class="neon-m" style="text-decoration: none;"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://wa.me/905302447448" target="_blank" style="color: var(--green); text-decoration: none;"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="mailto:ubixdubi@gmail.com" style="color: var(--cyan); text-decoration: none;"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+    <p class="mono" style="font-size: 10px; color: #3d5260;">&copy; 2026 UBEYDULLAH DOĞAN // PORTFOLIO</p>
+  </div>
+</section>
+
+<!-- ============ GALERİ MODAL ============ -->
+<div id="galleryModal" onclick="closeGalleryModal(event)">
+  <img id="galleryModalImg" src="" alt="">
+</div>
+
+<!-- ============ SERTİFİKA MODAL ============ -->
+<div id="galleryModal2" onclick="closeCertModal(event)" style="position: fixed; inset: 0; z-index: 90; background: rgba(2,3,8,0.94); display: none; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(6px);">
+  <button onclick="closeCertModal()" style="position: absolute; top: 24px; right: 24px; font-size: 30px; color: var(--cyan); background: none; border: none; cursor: pointer; z-index: 50;"><i class="fa-solid fa-xmark"></i></button>
+  <div class="panel" style="max-width: 600px; width: 100%; padding: 24px; background: #070a14;">
+    <div id="certModalContent" style="text-align: center; color: #8fa3ae; font-family: 'Share Tech Mono', monospace; font-size: 12px; line-height: 1.8;"></div>
+  </div>
+</div>
+
+<script>
+/* ============ ÇEVİRİLER ============ */
+const translations = {
+  tr: {
+    "nav.about": "HAKKIMDA",
+    "nav.gallery": "GALERİ",
+    "nav.documents": "BELGELER",
+    "nav.skills": "YETENEKLER",
+    "nav.experience": "DENEYİM",
+    "nav.contact": "İLETİŞİM",
+    "hero.badge": "TEKNİK OPERATÖR & ZANAATKAR",
+    "hero.desc": "28 yaşında, kriz anlarında soğukkanlı, pratik çözümler üreten çok yönlü teknik operatör. Elektrik montörlüğünden sıhhi tesisata, web yazılımından ağır sanayi ve saha operasyonlarına kadar geniş bir zanaat yelpazesi.",
+    "hero.chip_age": "YAŞ / AGE",
+    "hero.chip_height": "BOY / GRÖSSE",
+    "hero.chip_weight": "KILO / GEWICHT",
+    "hero.chip_license": "EHLİYET / FÜHRERSCHEIN",
+    "hero.btn_gallery": "GALERİ",
+    "hero.btn_contact": "WHATSAPP",
+    "hero.avatar_note": "DİJİTAL AVATAR // FOTOĞRAF REFERANSINDAN ÜRETİLMİŞTİR",
+    "ticker.t1": "ELEKTRİK TESİSAT & ŞALT",
+    "ticker.t2": "SIHHİ TESİSAT",
+    "ticker.t3": "WEB YAZILIM",
+    "ticker.t4": "MOBİLYA & DÖŞEME",
+    "ticker.t5": "TEKSTİL & KONFEKSİYON",
+    "ticker.t6": "ÖZEL GÜVENLİK",
+    "ticker.t7": "LOJİSTİK & AĞIR SAHA",
+    "about.title_1": "PROFİL &",
+    "about.title_2": "MOTİVASYON",
+    "about.p1": "Fiziksel zanaat becerilerimi, teknik geçmişimi ve yüksek pozitif enerjimi toplumsal dayanışma projelerine aktarmak en büyük hedefimdir. Renovasyon işleri, ekoköy projeleri ya da gençler için açılan teknik atölyelerde çok yönlü el becerilerim sayesinde anında verimlilik sağlayabiliyorum.",
+    "about.p2": "Almanya'da ailem tarafından kurulan gastronomi işletmesi ve orada ikamet eden akrabalarım dolayısıyla, ülkeye uzun vadeli, akıcı ve güçlü bağlarla entegre olma konusunda son derece kararlıyım. Şu anda aktif olarak yoğun özel Almanca dersleri almaktayım.",
+    "about.p3": "Boyum 1.78 m, kilom 73 kg. Fiziksel kondisyonum ağır saha işleri ve uzun saatlik operasyonlar için her zaman uygundur.",
+    "about.applicant": "ADAY // BEWERBER",
+    "about.sys_nominal": "ALL SYSTEMS NOMINAL ▮▮▮",
+    "about.qr_connect": "QR İLE BAĞLAN // SCAN TO CONNECT",
+    "gallery.title_1": "RESİM",
+    "gallery.title_2": "GALERİSİ",
+    "gallery.hint": "Tıkla büyüt, tekrar tıkla küçült // Click to enlarge, click again to shrink",
+    "gallery.btn_all": "TÜMÜ",
+    "gallery.btn_bamsi": "BAMSI 🐕",
+    "gallery.btn_me": "BEN",
+    "gallery.btn_friends": "ARKADAŞLAR",
+    "gallery.placeholder_bamsi": "Bamsı fotoğrafı eklenecek",
+    "gallery.placeholder_me": "Fotoğraf eklenecek",
+    "gallery.placeholder_friends": "Arkadaş fotoğrafı eklenecek",
+    "docs.title_1": "SERTİFİKALAR &",
+    "docs.title_2": "EHLİYET",
+    "docs.hint": "Görselleri büyütmek için tıkla // Click to enlarge images",
+    "docs.cert1_placeholder": "Sertifika fotoğrafı buraya eklenecek",
+    "docs.cert1_title": "ELEKTRİK MONTÖRLÜĞÜ BELGESİ",
+    "docs.cert1_sub": "FSMVÜ SÜREKLİ EĞİTİM — 2352 SAAT",
+    "docs.cert1_desc": "Fatih Sultan Mehmet Vakıf Üniversitesi Sürekli Eğitim Merkezi tarafından düzenlenen Elektrik Tesisat ve Pano Montörlüğü kurs bitirme belgesi. 2352 saatlik eğitim programını başarıyla tamamlamıştır.",
+    "docs.cert2_placeholder": "Sertifika fotoğrafı buraya eklenecek",
+    "docs.cert2_title": "SIHHİ TESİSAT SERTİFİKASI",
+    "docs.cert2_sub": "FSMVÜ SÜREKLİ EĞİTİM — 576 SAAT",
+    "docs.cert2_desc": "FSMVÜ Sürekli Eğitim tarafından düzenlenen Sıhhi Tesisatçı Eğitim Programı sertifikası. Temiz ve atık su borulama hatları, bina içi tesisat döşeme ve bakım konularında 576 saatlik eğitim.",
+    "docs.cert3_placeholder": "Sertifika fotoğrafı buraya eklenecek",
+    "docs.cert3_title": "YÖK ÖĞRENCİ BELGESİ",
+    "docs.cert3_sub": "İNÖNÜ ÜNİVERSİTESİ — ÖZEL GÜVENLİK VE KORUMA",
+    "docs.cert3_desc": "Yükseköğretim Kurulu onaylı İnönü Üniversitesi Özel Güvenlik ve Koruma Programı öğrenci belgesi. Aktif öğrenci statüsü devam etmektedir.",
+    "docs.license_placeholder": "Ehliyet fotoğrafı buraya eklenecek",
+    "docs.license_title": "SÜRÜCÜ EHLİYETİ",
+    "docs.license_sub": "A & B SINIFI — MOTOSİKLET & OTOMOBİL",
+    "docs.license_desc": "A ve B sınıfı sürücü belgesi. Motrosiklet (A) ve otomobil (B) kullanma yetkisi geçerlidir. T.C. Nüfus ve Vatandaşlık İşleri tarafından verilmiştir.",
+    "docs.cert4_title": "GİTAR EĞİTİMİ SERTİFİKASI",
+    "docs.cert4_sub": "MEB HAYAT BOYU ÖĞRENME — POPÜLER GİTAR",
+    "docs.cert4_desc": "T.C. Millî Eğitim Bakanlığı Hayat Boyu Öğrenme Genel Müdürlüğü bünyesinde tamamlanan Popüler Gitar Eğitimi kurs bitirme belgesi.",
+    "docs.cert5_title": "SİLAHLI ÖZEL GÜVENLİK SERTİFİKASI",
+    "docs.cert5_sub": "T.C. ADIYAMAN VALİLİĞİ — ÖZEL GÜVENLİK EĞİTİMİ",
+    "docs.cert5_desc": "Adıyaman Valiliği tarafından düzenlenen Silahlı Özel Güvenlik Eğitim sertifikası. Silahlı özel güvenlik görevlisi eğitim programını başarıyla tamamlamıştır.",
+    "docs.cert6_title": "ASKERLİK TAKDİRNAME",
+    "docs.cert6_sub": "NİĞDE İL JANDARMA KOMUTANLIĞI",
+    "docs.cert6_desc": "T.C. Niğde Valiliği İl Jandarma Komutanlığı tarafından askerlik hizmetindeki başarı ve üstün performansından dolayı verilen takdirname belgesi.",
+    "docs.dob": "DOĞUM:",
+    "docs.nationality": "UYRUK:",
+    "docs.nationality_val": "TÜRKİYE CUMHURİYETİ",
+    "docs.verification": "DOĞRULAMA:",
+    "skills.title_1": "YETENEK",
+    "skills.title_2": "HAVUZU",
+    "skills.s1_title": "ELEKTRİK TESİSAT & ŞALT",
+    "skills.s1_desc": "Fabrika ve ev tipi pano montajı, kablo çekim planlamaları, arıza takip ve devre kurulum şemaları okuma.",
+    "skills.s2_title": "SIHHİ TESİSAT & ISITMA",
+    "skills.s2_desc": "Temiz ve atık su borulama hatları, bina içi sıhhi tesisat döşeme, arıza, montaj ve bakım uygulamaları.",
+    "skills.s3_title": "WEB YAZILIM & GELİŞTİRME",
+    "skills.s3_desc": "Web geliştirme alanında yetkinlik. Aile şirketleri ve kurumsal markalar için web sitesi tasarımı.",
+    "skills.s4_title": "MOBİLYA TAMİRİ & DÖŞEME",
+    "skills.s4_desc": "Koltuk ve mobilya tamiri, modifikasyonu, iskelet döşemeciliği. Koltuğa ses sistemi kurulumu dahil özel modifikasyonlar.",
+    "skills.s5_title": "TEKSTİL & KONFEKSİYON",
+    "skills.s5_desc": "Endüstriyel dikiş makinesi operatörlüğü ve ütü ustalığı. Tekstil konfeksiyon üretim süreçlerinde deneyim.",
+    "skills.s6_title": "SANAYİ MAKİNELERİ",
+    "skills.s6_desc": "Merinos İplik Fabrikası başta olmak üzere büyük sanayi makinelerine elimin yatkın olduğu kanıtlanmıştır. Koparma makinesi operatörlüğü tecrübesi.",
+    "skills.s7_title": "ÖZEL GÜVENLİK & KORUMA",
+    "skills.s7_desc": "Fiziksel alan koruma, devriye planlama, güvenlik protokolleri ve mülkiyet güvenliği yönetimi.",
+    "skills.s8_title": "LOJİSTİK & AĞIR SAHA",
+    "skills.s8_desc": "Yüksek fiziksel mukavemet gerektiren yıkım ve taşıma operasyonları yönetimi. Motorlu taşıt kullanımı.",
+    "skills.s9_title": "DÜNYA MUTFAKLARI & AŞÇILIK",
+    "skills.s9_desc": "Dünya mutfaklarından yemekler hazırlayabilme yeteneği. Ailesi aşçı olan, mutfak kültürüyle büyümüş ve lezzet ile sunumda profesyonel anlayışa sahip.",
+    "exp.title_1": "SAHA",
+    "exp.title_2": "TECRÜBELERİ",
+    "exp.e1_tag": "MERİNOS İPLİK FABRİKASI",
+    "exp.e1_title": "KOPARMA MAKİNESİ OPERATÖRLÜĞÜ",
+    "exp.e1_desc": "Merinos İplik Fabrikası'nda koparma makinesi operatörü olarak çalıştım. Büyük sanayi makinelerine elimin yatkın olduğunu burada kanıtladım. Yüksek hızlı endüstriyel üretim süreçlerinde disiplinli ve verimli çalıştım.",
+    "exp.e2_tag": "SANAYİ MAKİNELERİ",
+    "exp.e2_title": "BÜYÜK SANAYİ MAKİNELERİNE YATKINLIK",
+    "exp.e2_desc": "Ağır sanayi makinelerinin operasyonunda geniş deneyim. Fabrika tipi makinelerin kurulumu, bakımı ve operatörlüğü konularında pratik bilgi ve beceri. Makine arızalarında hızlı müdahale ve çözüm üretme yeteneği.",
+    "exp.e3_tag": "MOBİLYA & MODİFİKASYON",
+    "exp.e3_title": "KOLTUK & MOBİLYA TAMİRİ VE MODİFİKASYONU",
+    "exp.e3_desc": "Koltuk ve mobilya tamiri, modifikasyonu yapmaktayım. Koltuklara ses sistemi kurulumu dahil özel modifikasyonlar gerçekleştirdim. Mobilya iskelet onarımı, yeniden döşeme ve fonksiyonel iyileştirmeler konusunda uzmanlığım var.",
+    "exp.e4_tag": "DÖŞEME USTALIĞI",
+    "exp.e4_title": "DÖŞEME USTASI",
+    "exp.e4_desc": "Profesyonel döşeme ustası olarak koltuk, sandalye ve mobilya döşemeciliği yaptım. Kumaş seçimi, kesim, dikim ve montaj süreçlerinde tam ustalık. Müşteri beklentilerine göre özel tasarım döşeme işleri.",
+    "exp.e5_tag": "TEKSTİL & KONFEKSİYON",
+    "exp.e5_title": "DİKİŞ MAKİNESİ VE ÜTÜ USTALIĞI",
+    "exp.e5_desc": "Tekstil ve konfeksiyon sektöründe endüstriyel dikiş makinesi operatörlüğü ve ütü ustalığı yaptım. Yüksek hacimli üretim hatlarında hızlı ve kaliteli çalışma. Kumaş türlerine göre doğru dikiş ve ütü teknikleri uygulama.",
+    "exp.e6_tag": "6 AY // JAPONYA",
+    "exp.e6_title": "YIKIM ENDÜSTRİSİ OPERATÖRLÜĞÜ",
+    "exp.e6_desc": "Kuzenimin Japonya'daki yıkım şirketinde fiziksel olarak son derece ağır koşullarda çalıştım. Dil bilmememe rağmen disiplinim ve çalışkanlığımla kendimi kanıtlayarak ömürlük dostluklar kurdum.",
+    "exp.e7_tag": "AFET SAHASI",
+    "exp.e7_title": "MALATYA DEPREMİ ARAMA-KURTARMA GÖNÜLLÜSÜ",
+    "exp.e7_desc": "Yıkıcı Malatya depremini bizzat yaşadım ve ilk anlardan itibaren sahada aktif kurtarma ve lojistik yardım çalışmalarına katıldım. Aşırı stres altında soğukkanlı kalıp çözüm üretmeyi tecrübe ettim.",
+    "contact.title_1": "İLETİŞİM",
+    "contact.title_2": "KANALI",
+    "contact.desc": "Teknik iş birliği ortakları, web projeleri ve saha operasyonları için her zaman açığım. WhatsApp üzerinden hızlı iletişim kurabilirsiniz.",
+    "contact.location": "DİYARBAKIR / TÜRKİYE"
+  },
+  de: {
+    "nav.about": "ÜBER MICH",
+    "nav.gallery": "GALERIE",
+    "nav.documents": "DOKUMENTE",
+    "nav.skills": "FÄHIGKEITEN",
+    "nav.experience": "ERFAHRUNG",
+    "nav.contact": "KONTAKT",
+    "hero.badge": "TECHNISCHER OPERATOR & HANDWERKER",
+    "hero.desc": "28 Jahre alt, vielseitiger technischer Allrounder mit kühlem Kopf in Krisensituationen – von Elektroinstallation über Sanitär bis Webentwicklung und Industrie.",
+    "hero.chip_age": "ALTER / AGE",
+    "hero.chip_height": "GRÖSSE / HEIGHT",
+    "hero.chip_weight": "GEWICHT / WEIGHT",
+    "hero.chip_license": "FÜHRERSCHEIN",
+    "hero.btn_gallery": "GALERIE",
+    "hero.btn_contact": "WHATSAPP",
+    "hero.avatar_note": "DIGITALER AVATAR // AUS FOTOREFERENZ ERSTELLT",
+    "ticker.t1": "ELEKTROINSTALLATION",
+    "ticker.t2": "SANITÄRANLAGEN",
+    "ticker.t3": "WEBENTWICKLUNG",
+    "ticker.t4": "MÖBEL & POLSTERUNG",
+    "ticker.t5": "TEXTIL & KONFEKTION",
+    "ticker.t6": "PERSONENSCHUTZ",
+    "ticker.t7": "LOGISTIK & SCHWERARBEIT",
+    "about.title_1": "PROFIL &",
+    "about.title_2": "MOTIVATION",
+    "about.p1": "Mein größtes Ziel ist es, meine handwerklichen Fähigkeiten und meine technische Ausbildung in gemeinnützige Solidaritätsprojekte einzubringen. Durch meine Vielseitigkeit kann ich in Renovierungen, Ökodörfern oder technischen Werkstätten sofort produktiv werden.",
+    "about.p2": "Da meine Familie in Deutschland ein Gastronomieunternehmen aufbaut und Verwandte dort leben, bin ich langfristig stark motiviert, mich fließend zu integrieren. Derzeit nehme ich intensiven Privatunterricht in Deutsch.",
+    "about.p3": "Meine Größe beträgt 1,78 m, mein Gewicht 73 kg. Meine körperliche Verfassung ist für schwere Feldarbeit und lange Einsätze stets geeignet.",
+    "about.applicant": "BEWERBER",
+    "about.sys_nominal": "ALL SYSTEMS NOMINAL ▮▮▮",
+    "about.qr_connect": "QR VERBINDEN // SCAN TO CONNECT",
+    "gallery.title_1": "BILD",
+    "gallery.title_2": "GALERIE",
+    "gallery.hint": "Klick zum Vergrößern, erneut klick zum Verkleinern",
+    "gallery.btn_all": "ALLE",
+    "gallery.btn_bamsi": "BAMSI 🐕",
+    "gallery.btn_me": "ICH",
+    "gallery.btn_friends": "FREUNDE",
+    "gallery.placeholder_bamsi": "Bamsi-Foto wird hinzugefügt",
+    "gallery.placeholder_me": "Foto wird hinzugefügt",
+    "gallery.placeholder_friends": "Freundesfoto wird hinzugefügt",
+    "docs.title_1": "ZERTIFIKATE &",
+    "docs.title_2": "FÜHRERSCHEIN",
+    "docs.hint": "Klicken um Bilder zu vergrößern",
+    "docs.cert1_placeholder": "Zertifikatfoto wird hier hinzugefügt",
+    "docs.cert1_title": "ELEKTROINSTALLATEUR-ZERTIFIKAT",
+    "docs.cert1_sub": "FSMVÜ WEITERBILDUNG — 2352 STUNDEN",
+    "docs.cert1_desc": "Kursabschlusszertifikat für Elektroinstallation und Schalttafel-Montage, ausgestellt vom Weiterbildungszentrum der Fatih Sultan Mehmet Vakıf Universität. 2352 Stunden Ausbildung erfolgreich abgeschlossen.",
+    "docs.cert2_placeholder": "Zertifikatfoto wird hier hinzugefügt",
+    "docs.cert2_title": "SANITÄR-ZERTIFIKAT",
+    "docs.cert2_sub": "FSMVÜ WEITERBILDUNG — 576 STUNDEN",
+    "docs.cert2_desc": "Zertifikat für Sanitärinstallateur-Ausbildung von der FSMVÜ Weiterbildung. 576 Stunden Ausbildung in Frisch- und Abwasserleitungen, Gebäudeinstallation und Wartung.",
+    "docs.cert3_placeholder": "Zertifikatfoto wird hier hinzugefügt",
+    "docs.cert3_title": "YÖK STUDIENBESCHEINIGUNG",
+    "docs.cert3_sub": "İNÖNÜ UNIVERSITÄT — PERSONENSCHUTZ",
+    "docs.cert3_desc": "Vom Hochschulrat bestätigte Studienbescheinigung der İnönü Universität für das Programm Privatsicherheit und Schutz. Aktiver Studentenstatus.",
+    "docs.license_placeholder": "Führerscheinfoto wird hier hinzugefügt",
+    "docs.license_title": "FÜHRERSCHEIN",
+    "docs.license_sub": "KLASSE A & B — MOTORRAD & PKW",
+    "docs.license_desc": "Führerschein der Klasse A und B. Berechtigt zum Führen von Motorrädern (A) und PKW (B). Ausgestellt vom türkischen Innenministerium.",
+    "docs.cert4_title": "GITARREN-UNTERRICHT ZERTIFIKAT",
+    "docs.cert4_sub": "MEB LEBENSLANGES LERNEN — POPULÄRE GITARRE",
+    "docs.cert4_desc": "Abschlusszertifikat des Popüler-Gitarre-Kurses der Generaldirektion für lebenslanges Lernen des türkischen Bildungsministeriums.",
+    "docs.cert5_title": "ZERTIFIKAT BEWAFFNETER PRIVATSCHUTZ",
+    "docs.cert5_sub": "PROVINZVERWALTUNG ADIYAMAN — AUSBILDUNG",
+    "docs.cert5_desc": "Zertifikat der bewaffneten Privatschutz-Ausbildung, ausgestellt von der Provinzverwaltung Adıyaman.",
+    "docs.cert6_title": "MILITÄR-LOBESSCHREIBEN",
+    "docs.cert6_sub": "GENDARMERIE-KOMMANDANTUR NIĞDE",
+    "docs.cert6_desc": "Lobesschreiben der Provinz-Gendarmerie Niğde für erfolgreichen Militärdienst und herausragende Leistung.",
+    "docs.dob": "GEBURT:",
+    "docs.nationality": "STAATSANGEHÖRIGKEIT:",
+    "docs.nationality_val": "REPUBLIK TÜRKEI",
+    "docs.verification": "VERIFIZIERUNG:",
+    "skills.title_1": "FÄHIGKEITEN-",
+    "skills.title_2": "POOL",
+    "skills.s1_title": "ELEKTROINSTALLATION",
+    "skills.s1_desc": "Fabrik- und Haushaltsschaltschrank-Montage, Kabelverlegeplanung, Fehlersuche und Schaltpläne lesen.",
+    "skills.s2_title": "SANITÄR & HEIZUNG",
+    "skills.s2_desc": "Frisch- und Abwasserleitungen, Gebäudeinstallation, Wartung und Reparatur.",
+    "skills.s3_title": "WEBENTWICKLUNG",
+    "skills.s3_desc": "Kompetenz in der Webentwicklung. Website-Design für Familienunternehmen und Marken.",
+    "skills.s4_title": "MÖBELREPARATUR & POLSTERUNG",
+    "skills.s4_desc": "Sofa- und Möbelreparatur, Modifikation, Polsterung. Einbau von Soundsystemen in Sofas inklusive Sondermodifikationen.",
+    "skills.s5_title": "TEXTIL & KONFEKTION",
+    "skills.s5_desc": "Industrielle Nähmaschine und Bügeln. Erfahrung in Textilproduktionsprozessen.",
+    "skills.s6_title": "INDUSTRIEMASCHINEN",
+    "skills.s6_desc": "Bei Merinos Garnfabrik und anderen Industriebetrieben Erfahrung mit großen Industriemaschinen. Reißmaschine-Operator.",
+    "skills.s7_title": "PERSONENSCHUTZ",
+    "skills.s7_desc": "Objektschutz, Streifenplanung, Sicherheitsprotokolle und Eigentumsschutz.",
+    "skills.s8_title": "LOGISTIK & SCHWERARBEIT",
+    "skills.s8_desc": "Abbruch- und Transportoperationen mit hoher körperlicher Belastung. Fahrerlaubnis für Kraftfahrzeuge.",
+    "skills.s9_title": "WELTKÜCHEN & KOCHKUNST",
+    "skills.s9_desc": "Zubereitung von Gerichten aus verschiedenen Weltküchen. Stammt aus einer Familie von Köchen, aufgewachsen mit Kochkultur, mit professionellem Verständnis für Geschmack und Präsentation.",
+    "exp.title_1": "PRAXIS-",
+    "exp.title_2": "ERFAHRUNG",
+    "exp.e1_tag": "MERINOS GARNFABRIK",
+    "exp.e1_title": "REIßMASCHINEN-OPERATOR",
+    "exp.e1_desc": "In der Merinos Garnfabrik arbeitete ich als Reißmaschinen-Operator. Ich bewies meine Geschicklichkeit mit großen Industriemaschinen. Bei hochgeschwindigkeits-Produktionsprozessen arbeitete ich diszipliniert und effizient.",
+    "exp.e2_tag": "INDUSTRIEMASCHINEN",
+    "exp.e2_title": "AFFINITÄT ZU INDUSTRIEMASCHINEN",
+    "exp.e2_desc": "Umfangreiche Erfahrung im Betrieb schwerer Industriemaschinen. Praktische Kenntnisse in Installation, Wartung und Bedienung von Fabrikmaschinen. Schnelle Eingreiffähigkeit bei Maschinenstörungen.",
+    "exp.e3_tag": "MÖBEL & MODIFIKATION",
+    "exp.e3_title": "SOFA- & MÖBELREPARATUR UND MODIFIKATION",
+    "exp.e3_desc": "Ich führe Sofa- und Möbelreparatur sowie Modifikationen durch. Dazu gehörten auch der Einbau von Soundsystemen in Sofas und andere Sondermodifikationen. Fachmann für Möbelgerüst-Reparatur, Neu-Polsterung und funktionale Verbesserungen.",
+    "exp.e4_tag": "POLSTERUNG",
+    "exp.e4_title": "POLSTERER",
+    "exp.e4_desc": "Als professioneller Polsterer führte ich Sofa-, Stuhl- und Möbelpolsterungen durch. Volle Meisterschaft in Stoffauswahl, Zuschnitt, Naht und Montage. Spezielle Polsterarbeiten nach Kundenwünschen.",
+    "exp.e5_tag": "TEXTIL & KONFEKTION",
+    "exp.e5_title": "NÄHMASCHINE UND BÜGELEISEN",
+    "exp.e5_desc": "In der Textil- und Konfektionsbranche arbeitete ich als industrielle Nähmaschinen-Operatorin und Bügelfachmann. Schnelles und qualitatives Arbeiten an Hochvolumen-Produktionslinien. Richtige Näh- und Bügeltechniken je nach Stoffart.",
+    "exp.e6_tag": "6 MONATE // JAPAN",
+    "exp.e6_title": "ABBRUCHINDUSTRIE-OPERATOR",
+    "exp.e6_desc": "Ich arbeitete 6 Monate in Japan im Abrissunternehmen meines Cousins unter körperlich schwersten Bedingungen und bewies mich durch Fleiß – ohne ein Wort Japanisch zu sprechen.",
+    "exp.e7_tag": "KRISENGEBIET",
+    "exp.e7_title": "MALATYA ERDBEBEN RETTUNGSFREIWILLIGER",
+    "exp.e7_desc": "Ich erlebte das schwere Erdbeben in Malatya und nahm ab der ersten Stunde aktiv an Rettungs- und Hilfsmaßnahmen teil – und lernte, unter extremem Stress lösungsorientiert zu handeln.",
+    "contact.title_1": "KOMMUNIKATIONS-",
+    "contact.title_2": "KANAL",
+    "contact.desc": "Für technische Kooperationen, Webprojekte und Feldoperationen stehe ich jederzeit zur Verfügung. Sie können mich über WhatsApp schnell erreichen.",
+    "contact.location": "DIYARBAKIR / TÜRKEI"
+  },
+  en: {
+    "nav.about": "ABOUT",
+    "nav.gallery": "GALLERY",
+    "nav.documents": "DOCUMENTS",
+    "nav.skills": "SKILLS",
+    "nav.experience": "EXPERIENCE",
+    "nav.contact": "CONTACT",
+    "hero.badge": "TECHNICAL OPERATOR & CRAFTSMAN",
+    "hero.desc": "28 years old, versatile technical operator with a cool head in crisis situations — from electrical installation to plumbing, web development to heavy industry and field operations.",
+    "hero.chip_age": "AGE",
+    "hero.chip_height": "HEIGHT",
+    "hero.chip_weight": "WEIGHT",
+    "hero.chip_license": "LICENSE",
+    "hero.btn_gallery": "GALLERY",
+    "hero.btn_contact": "WHATSAPP",
+    "hero.avatar_note": "DIGITAL AVATAR // GENERATED FROM PHOTO REFERENCE",
+    "ticker.t1": "ELECTRICAL INSTALLATION",
+    "ticker.t2": "PLUMBING",
+    "ticker.t3": "WEB DEVELOPMENT",
+    "ticker.t4": "FURNITURE & UPHOLSTERY",
+    "ticker.t5": "TEXTILE & GARMENT",
+    "ticker.t6": "SECURITY",
+    "ticker.t7": "LOGISTICS & HEAVY FIELD",
+    "about.title_1": "PROFILE &",
+    "about.title_2": "MOTIVATION",
+    "about.p1": "My greatest goal is to apply my physical craft skills, technical background, and high positive energy to community solidarity projects. Through my versatility, I can be immediately productive in renovations, eco-villages, or technical workshops for youth.",
+    "about.p2": "Since my family has established a gastronomy business in Germany and relatives live there, I am highly motivated to integrate long-term with strong ties. I am currently taking intensive private German lessons.",
+    "about.p3": "My height is 1.78 m and weight is 73 kg. My physical condition is always suitable for heavy field work and long-hour operations.",
+    "about.applicant": "APPLICANT",
+    "about.sys_nominal": "ALL SYSTEMS NOMINAL ▮▮▮",
+    "about.qr_connect": "SCAN TO CONNECT",
+    "gallery.title_1": "PHOTO",
+    "gallery.title_2": "GALLERY",
+    "gallery.hint": "Click to enlarge, click again to shrink",
+    "gallery.btn_all": "ALL",
+    "gallery.btn_bamsi": "BAMSI 🐕",
+    "gallery.btn_me": "ME",
+    "gallery.btn_friends": "FRIENDS",
+    "gallery.placeholder_bamsi": "Bamsi photo will be added",
+    "gallery.placeholder_me": "Photo will be added",
+    "gallery.placeholder_friends": "Friend photo will be added",
+    "docs.title_1": "CERTIFICATES &",
+    "docs.title_2": "LICENSE",
+    "docs.hint": "Click to enlarge images",
+    "docs.cert1_placeholder": "Certificate photo will be added here",
+    "docs.cert1_title": "ELECTRICAL INSTALLATION CERTIFICATE",
+    "docs.cert1_sub": "FSMVÜ CONTINUING EDUCATION — 2352 HOURS",
+    "docs.cert1_desc": "Course completion certificate for Electrical Installation and Panel Mounting, issued by the Continuing Education Center of Fatih Sultan Mehmet Vakıf University. Successfully completed a 2352-hour training program.",
+    "docs.cert2_placeholder": "Certificate photo will be added here",
+    "docs.cert2_title": "PLUMBING CERTIFICATE",
+    "docs.cert2_sub": "FSMVÜ CONTINUING EDUCATION — 576 HOURS",
+    "docs.cert2_desc": "Certificate from the Plumbing Training Program by FSMVÜ Continuing Education. 576 hours of training in fresh and waste water piping, building installation and maintenance.",
+    "docs.cert3_placeholder": "Certificate photo will be added here",
+    "docs.cert3_title": "YÖK STUDENT CERTIFICATE",
+    "docs.cert3_sub": "İNÖNÜ UNIVERSITY — PRIVATE SECURITY",
+    "docs.cert3_desc": "Student certificate approved by the Council of Higher Education for İnönü University Private Security and Protection Program. Active student status continues.",
+    "docs.license_placeholder": "License photo will be added here",
+    "docs.license_title": "DRIVER'S LICENSE",
+    "docs.license_sub": "CLASS A & B — MOTORCYCLE & CAR",
+    "docs.license_desc": "Class A and B driver's license. Authorized to drive motorcycles (A) and cars (B). Issued by the Turkish Ministry of Interior.",
+    "docs.cert4_title": "GUITAR EDUCATION CERTIFICATE",
+    "docs.cert4_sub": "MEB LIFELONG LEARNING — POPULAR GUITAR",
+    "docs.cert4_desc": "Popular Guitar Education course completion certificate issued under the Turkish Ministry of National Education, Directorate General of Lifelong Learning.",
+    "docs.cert5_title": "ARMED PRIVATE SECURITY CERTIFICATE",
+    "docs.cert5_sub": "ADIYAMAN GOVERNORSHIP — SECURITY TRAINING",
+    "docs.cert5_desc": "Armed Private Security Training certificate issued by the Adıyaman Governorship of the Republic of Türkiye.",
+    "docs.cert6_title": "MILITARY COMMENDATION",
+    "docs.cert6_sub": "NIĞDE PROVINCIAL GENDARMERIE COMMAND",
+    "docs.cert6_desc": "Commendation issued by the Niğde Provincial Gendarmerie Command for successful military service and outstanding performance.",
+    "docs.dob": "DOB:",
+    "docs.nationality": "NATIONALITY:",
+    "docs.nationality_val": "REPUBLIC OF TURKEY",
+    "docs.verification": "VERIFICATION:",
+    "skills.title_1": "SKILL",
+    "skills.title_2": "POOL",
+    "skills.s1_title": "ELECTRICAL INSTALLATION",
+    "skills.s1_desc": "Factory and household panel mounting, cable routing plans, troubleshooting and reading circuit diagrams.",
+    "skills.s2_title": "PLUMBING & HEATING",
+    "skills.s2_desc": "Fresh and waste water piping, building plumbing installation, repair and maintenance.",
+    "skills.s3_title": "WEB DEVELOPMENT",
+    "skills.s3_desc": "Competence in web development. Website design for family businesses and brands.",
+    "skills.s4_title": "FURNITURE REPAIR & UPHOLSTERY",
+    "skills.s4_desc": "Sofa and furniture repair, modification, frame upholstery. Including sound system installation in sofas and custom modifications.",
+    "skills.s5_title": "TEXTILE & GARMENT",
+    "skills.s5_desc": "Industrial sewing machine operation and ironing expertise. Experience in textile production processes.",
+    "skills.s6_title": "INDUSTRIAL MACHINES",
+    "skills.s6_desc": "Proven affinity for large industrial machines, especially at Merinos Yarn Factory. Breaking machine operator experience.",
+    "skills.s7_title": "PRIVATE SECURITY",
+    "skills.s7_desc": "Physical area protection, patrol planning, security protocols and property security management.",
+    "skills.s8_title": "LOGISTICS & HEAVY FIELD",
+    "skills.s8_desc": "Demolition and transport operations requiring high physical endurance. Licensed motor vehicle operator.",
+    "skills.s9_title": "WORLD CUISINES & COOKING",
+    "skills.s9_desc": "Able to prepare dishes from world cuisines. Comes from a family of cooks, grew up with culinary culture, with a professional sense of taste and presentation.",
+    "exp.title_1": "FIELD",
+    "exp.title_2": "EXPERIENCE",
+    "exp.e1_tag": "MERINOS YARN FACTORY",
+    "exp.e1_title": "BREAKING MACHINE OPERATOR",
+    "exp.e1_desc": "I worked as a breaking machine operator at Merinos Yarn Factory. I proved my affinity for large industrial machines here. I worked with discipline and efficiency in high-speed production processes.",
+    "exp.e2_tag": "INDUSTRIAL MACHINES",
+    "exp.e2_title": "AFFINITY FOR INDUSTRIAL MACHINES",
+    "exp.e2_desc": "Extensive experience in operating heavy industrial machines. Practical knowledge in installation, maintenance, and operation of factory-type machines. Quick intervention and problem-solving ability in machine failures.",
+    "exp.e3_tag": "FURNITURE & MODIFICATION",
+    "exp.e3_title": "SOFA & FURNITURE REPAIR AND MODIFICATION",
+    "exp.e3_desc": "I perform sofa and furniture repair and modifications. I installed sound systems in sofas and carried out other custom modifications. Expertise in furniture frame repair, reupholstery, and functional improvements.",
+    "exp.e4_tag": "UPHOLSTERY",
+    "exp.e4_title": "UPHOLSTERER",
+    "exp.e4_desc": "As a professional upholsterer, I worked on sofa, chair, and furniture upholstery. Full mastery in fabric selection, cutting, sewing, and assembly. Custom upholstery work according to customer expectations.",
+    "exp.e5_tag": "TEXTILE & GARMENT",
+    "exp.e5_title": "SEWING MACHINE & IRONING EXPERTISE",
+    "exp.e5_desc": "In the textile and garment sector, I worked as an industrial sewing machine operator and ironing specialist. Fast and quality work on high-volume production lines. Correct sewing and ironing techniques for different fabric types.",
+    "exp.e6_tag": "6 MONTHS // JAPAN",
+    "exp.e6_title": "DEMOLITION INDUSTRY OPERATOR",
+    "exp.e6_desc": "I worked for 6 months in Japan at my cousin's demolition company under extremely harsh physical conditions. Despite not knowing the language, I proved myself through discipline and hard work, forming lifelong friendships.",
+    "exp.e7_tag": "DISASTER ZONE",
+    "exp.e7_title": "MALATYA EARTHQUAKE SEARCH & RESCUE VOLUNTEER",
+    "exp.e7_desc": "I personally experienced the devastating Malatya earthquake and participated in active rescue and logistics aid operations from the very first moments. I experienced staying calm and solution-oriented under extreme stress.",
+    "contact.title_1": "CONTACT",
+    "contact.title_2": "CHANNEL",
+    "contact.desc": "I am always available for technical collaborations, web projects, and field operations. You can reach me quickly via WhatsApp.",
+    "contact.location": "DIYARBAKIR / TURKEY"
+  }
+};
+
+let currentLang = 'tr';
+
+function switchLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+  document.querySelectorAll('.glitch').forEach(el => {
+    el.setAttribute('data-text', el.textContent);
+  });
+  ['tr', 'de', 'en'].forEach(l => {
+    const btn = document.getElementById('btn-' + l);
+    if (l === lang) {
+      btn.style.background = 'var(--cyan)';
+      btn.style.color = '#031015';
+    } else {
+      btn.style.background = 'transparent';
+      btn.style.color = '#6f8a96';
+    }
+  });
+}
+
+/* ============ GALERİ ============ */
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.gallery-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    if (cat === 'all' || item.dataset.cat === cat) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+      item.classList.remove('expanded');
+    }
+  });
+}
+
+function toggleExpand(el) {
+  // Eğer görsel varsa modal'da büyüt
+  const img = el.querySelector('img');
+  if (img && !el.classList.contains('expanded')) {
+    el.classList.add('expanded');
+    openGalleryModal(img.src);
+  } else {
+    el.classList.toggle('expanded');
+  }
+}
+
+function openGalleryModal(src) {
+  const modal = document.getElementById('galleryModal');
+  const modalImg = document.getElementById('galleryModalImg');
+  modalImg.src = src;
+  modal.classList.add('open');
+}
+
+function closeGalleryModal(e) {
+  if (e.target.id === 'galleryModal' || e.target.tagName === 'IMG') {
+    document.getElementById('galleryModal').classList.remove('open');
+    document.querySelectorAll('.gallery-item.expanded').forEach(el => el.classList.remove('expanded'));
+  }
+}
+
+/* ============ SERTİFİKA MODAL ============ */
+function openCertModal(el) {
+  const img = el.querySelector('img');
+  const content = document.getElementById('certModalContent');
+  const parent = el.closest('.cert-card');
+  const title = parent.querySelector('h3').textContent;
+  const desc = parent.querySelector('.cert-desc').textContent;
+  if (img) {
+    content.innerHTML = '<img src="' + img.src + '" style="max-width: 100%; border-radius: 6px; margin-bottom: 16px;"><h3 class="tech neon-c" style="font-size: 14px; margin-bottom: 8px;">' + title + '</h3><p style="font-size: 11px; line-height: 1.7;">' + desc + '</p>';
+  } else {
+    content.innerHTML = '<div style="padding: 40px;"><i class="fa-solid fa-certificate" style="font-size: 48px; opacity: 0.3; margin-bottom: 16px;"></i><p>' + translations[currentLang]['docs.cert1_placeholder'] + '</p></div>';
+  }
+  document.getElementById('galleryModal2').style.display = 'flex';
+}
+
+function closeCertModal(e) {
+  if (!e || e.target.id === 'galleryModal2' || e.target.closest('button')) {
+    document.getElementById('galleryModal2').style.display = 'none';
+  }
+}
+
+/* ============ MATRIX ARKA PLAN ============ */
+(function () {
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let W = canvas.width = innerWidth, H = canvas.height = innerHeight;
+  addEventListener('resize', () => { W = canvas.width = innerWidth; H = canvas.height = innerHeight; });
+  const cols = Math.floor(W / 24), ys = Array(cols).fill(0);
+  const palette = ['#00a8b5', '#00f0ff', '#7a2548'];
+  setInterval(() => {
+    ctx.fillStyle = 'rgba(4, 5, 12, 0.07)'; ctx.fillRect(0, 0, W, H);
+    ctx.font = '11px monospace';
+    ys.forEach((y, i) => {
+      ctx.fillStyle = palette[i % 3];
+      ctx.fillText(String.fromCharCode(0x30A0 + Math.random() * 96 || 33), i * 24, y);
+      ys[i] = (y > H && Math.random() > 0.975) ? 0 : y + 15;
+    });
+  }, 50);
+})();
+
+/* ============ TICKER ============ */
+(function () {
+  const row = document.getElementById('tickerRow');
+  row.innerHTML += row.innerHTML;
+})();
+
+/* ============ SAAT ============ */
+(function () {
+  const clock = document.getElementById('clock'), dateLine = document.getElementById('dateLine');
+  function tick() {
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, '0');
+    clock.textContent = p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+    dateLine.textContent = p(d.getDate()) + '.' + p(d.getMonth() + 1) + '.' + d.getFullYear() + ' // SECTOR: DIYARBAKIR';
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+/* ============ TERMINAL ============ */
+(function () {
+  const lines = [
+    ['$ init profil --ad soyad', ''],
+    ['> UBEYDULLAH DOĞAN', ''],
+    ['$ yas --sorgula', ''],
+    ['> 28 // 24.04.1998', ''],
+    ['$ fizik --olculer', ''],
+    ['> boy: 1.78m | kilo: 73kg', ''],
+    ['$ yetenek --liste', ''],
+    ['> elektrik | tesisat | web | guvenlik', ''],
+    ['$ sanayi --deneyim', ''],
+    ['> merinos iplik | koparma makinesi | tekstil', ''],
+    ['$ zanaat --uzmanlik', ''],
+    ['> mobilya tamiri | doseme | dikiş makinesi', ''],
+    ['$ dil --durum', ''],
+    ['> TURKCE (NATIV) | DEUTSCH (A1+) | ENGLISH', ''],
+    ['$ _', 'STOP'],
+  ];
+  const body = document.getElementById('termBody');
+  let li = 0, ci = 0;
+  function type() {
+    if (li >= lines.length) { setTimeout(() => { body.innerHTML = ''; li = 0; ci = 0; type(); }, 6000); return; }
+    const [text] = lines[li];
+    if (ci <= text.length) {
+      const shown = lines.slice(0, li).map(l => l[0].startsWith('$') ? '<span class="cmd">' + l[0] + '</span>' : l[0]).join('<br>') +
+        '<br>' + (text.startsWith('$') ? '<span class="cmd">' + text.slice(0, ci) + '</span>' : text.slice(0, ci));
+      body.innerHTML = shown + '<span class="cursor-blink"></span>';
+      ci++; setTimeout(type, 34);
+    } else { li++; ci = 0; setTimeout(type, 260); }
+  }
+  type();
+})();
+
+/* ============ SCROLL ANIMASYON ============ */
+(function () {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('section').forEach(s => {
+    s.classList.add('fade-in');
+    observer.observe(s);
+  });
+})();
+
+/* ============ BAŞLAT ============ */
+switchLang('tr');
+</script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  const DEFAULT_LINE_HEIGHT = 16;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_BY") {
+      const { deltaX, deltaY, deltaMode } = event.data;
+      if (!scrollForwarding || !Number.isFinite(deltaX) || !Number.isFinite(deltaY)) return;
+      if (deltaMode !== 0 && deltaMode !== 1 && deltaMode !== 2) return;
+      const lineHeight =
+        parseFloat(getComputedStyle(document.documentElement).lineHeight) || DEFAULT_LINE_HEIGHT;
+      const scaleX = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerWidth : 1;
+      const scaleY = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerHeight : 1;
+      // The selection overlay receives the wheel event instead of this iframe.
+      // Instant scrolling preserves trackpad deltas even on smooth-scroll sites.
+      window.scrollBy({ left: deltaX * scaleX, top: deltaY * scaleY, behavior: "instant" });
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>

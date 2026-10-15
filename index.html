@@ -97,6 +97,17 @@
   /* ---- bölüm başlıkları ---- */
   .sec-title { font-size: clamp(20px, 3.4vw, 34px); font-weight: 900; letter-spacing: 2px; }
   .sec-tag { font-family: 'Share Tech Mono', monospace; color: var(--magenta); font-size: 11px; letter-spacing: 3px; }
+  .mot-panel summary { display: flex; align-items: center; gap: 12px; padding: 22px 28px; cursor: pointer; list-style: none; font-family: 'Share Tech Mono', monospace; font-size: 13px; letter-spacing: 2px; color: var(--cyan); user-select: none; }
+  .mot-panel summary::-webkit-details-marker { display: none; }
+  .mot-panel summary:hover { color: #aef3ff; }
+  .mot-panel .mot-chevron { margin-left: auto; transition: transform 0.25s; font-size: 12px; color: #6f8a96; }
+  .mot-panel[open] .mot-chevron { transform: rotate(180deg); }
+  .mot-letter { padding: 6px 32px 32px; font-size: 15px; line-height: 1.95; color: #b8c9d3; text-align: left; }
+  .mot-letter p { margin: 0 0 18px; }
+  .mot-letter .mot-head { font-family: 'Share Tech Mono', monospace; font-size: 12px; line-height: 1.9; color: #8fa3ae; margin-bottom: 26px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .mot-letter .mot-head b { color: var(--cyan); font-weight: 400; }
+  .mot-letter .mot-sign { margin-top: 8px; }
+  .mot-letter .mot-sign b { color: #e8f6fa; }
 
   /* ---- kartlar ---- */
   .neo-card { transition: 0.25s; }
@@ -299,11 +310,45 @@
   </div>
 </section>
 
+<!-- ============ MOTİVASYON MEKTUBU ============ -->
+<section id="motivation" style="padding: 64px 20px; text-align: center; position: relative; background: rgba(3,5,12,0.9); border-top: 1px solid var(--line);">
+  <div style="max-width: 46rem; margin: 0 auto;">
+    <div class="sec-tag" style="margin-bottom: 12px;">// SEC.02 — MOTIVATION.txt</div>
+    <h2 class="sec-title tech" style="margin-bottom: 24px;"><span data-i18n="mot.title_1"></span> <span class="neon-c" data-i18n="mot.title_2"></span></h2>
+    <p style="font-size: 12px; line-height: 1.7; margin-bottom: 32px; color: #8fa3ae;" data-i18n="mot.desc"></p>
+    <details class="mot-panel panel neo-card" style="text-align: left;">
+      <summary>
+        <i class="fa-solid fa-envelope-open-text"></i>
+        <span data-i18n="mot.read"></span>
+        <i class="fa-solid fa-chevron-down mot-chevron"></i>
+      </summary>
+      <div class="mot-letter" lang="en">
+        <div class="mot-head">
+          <b>MOTIVATION LETTER FOR EUROPEAN SOLIDARITY CORPS</b><br>
+          Subject: Application for European Solidarity Corps Volunteer Project in Germany<br>
+          Applicant: Ubeydullah Doğan<br>
+          Email: ubixdubi@gmail.com
+        </div>
+        <p>Dear Project Selection Committee,</p>
+        <p>I am writing this letter not just to apply for a volunteer position, but to offer my hands, my time, and my heart to a community that needs support. My name is Ubeydullah Doğan, I am 28 years old from Türkiye, and my life has taught me—through the hardest ways possible—that the highest purpose we can pursue is to stand by other human beings and leave a meaningful mark on this world.</p>
+        <p>A few years ago, I survived a catastrophic motorcycle accident in which I was completely blameless. The impact was devastating. I spent days unconscious and months completely bedridden, fighting for my life on a purely liquid diet. The physical toll was immense: I suffered fractures in my cheekbone, in three different places of my jaw, my left leg, my left shoulder, my left hand, and my left arm, and I now carry two permanent titanium plates in my jaw. While my body has fully recovered and healed physically through intense resilience and determination, the emotional trauma, sadness, and fear of that event stayed with me for a long time. However, looking death in the eye changed my entire perspective on existence. I realized how fragile life is, and I understood that before my time on this earth ends, I must fight for humanity and leave good, useful, and beautiful deeds behind.</p>
+        <p>This epiphany was deeply reinforced and deepened when I experienced the devastating earthquake in my hometown, Malatya, in February 2023. In the freezing winter snow, amid chaos and destruction—driven by the second chance at life I was given—my immediate instinct was to run outside to help. Together with a team, we spent days and nights setting up shelters and distributing food, water, and heating systems to the people. That winter proved to me once again that solidarity is the ultimate remedy for trauma. Helping others heal is how I heal myself.</p>
+        <p>Beyond my deep mission to serve humanity, I bring a very practical, resourceful, and diverse set of skills to your projects. I am someone who loves to build, repair, and create solutions with my own hands. I have certified training and hands-on experience in electrical installation, plumbing, and property protection. Whether a community center needs its heating fixed, electrical wiring maintained, a website designed, or a physical space built from scratch, I have the practical know-how along with all kinds of technological support to get the job done. My professional background and my international teamwork experience in Japan have made me highly adaptable, resilient, and open-minded toward different cultures.</p>
+        <p>Germany represents a profound opportunity for me to channel my survival into solidarity. I want to submerge myself in a new environment, exchange cultural values, and actively contribute to your local community projects. To prepare myself, I am already undergoing active German language training with a personal coach, as I believe language is the ultimate bridge to understanding the people I wish to help.</p>
+        <p>I am not looking for a comfortable vacation; I am looking for a place where my hard work, my technical skills, and my genuine empathy can create a tangible, positive impact. I survived for a reason, and my goal now is to dedicate my energy to making the world a slightly better place.</p>
+        <p>Thank you very much for considering my application. I look forward to the possibility of discussing how I can contribute to your project.</p>
+        <p class="mot-sign">Warmest regards,<br><b>Ubeydullah Doğan</b></p>
+        <p class="mono" style="font-size: 10px; color: #5a7280;" data-i18n="mot.note"></p>
+      </div>
+    </details>
+  </div>
+</section>
+
 <!-- ============ GALERİ ============ -->
 <section id="gallery" style="padding: 80px 20px;">
   <div style="max-width: 80rem; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 56px;">
-      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.02 — GALLERY.img</div>
+      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.03 — GALLERY.img</div>
       <h2 class="sec-title tech"><span data-i18n="gallery.title_1"></span> <span class="neon-c" data-i18n="gallery.title_2"></span></h2>
       <p class="mono" style="font-size: 12px; margin-top: 16px; color: #5a7280;" data-i18n="gallery.hint"></p>
     </div>
@@ -352,7 +397,7 @@
 <section id="documents" style="padding: 80px 20px; background: rgba(8,11,22,0.5);">
   <div style="max-width: 72rem; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 56px;">
-      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.03 — DOCS_ARCHIVE.enc</div>
+      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.04 — DOCS_ARCHIVE.enc</div>
       <h2 class="sec-title tech"><span data-i18n="docs.title_1"></span> <span class="neon-c" data-i18n="docs.title_2"></span></h2>
       <p class="mono" style="font-size: 12px; margin-top: 16px; color: #5a7280;" data-i18n="docs.hint"></p>
     </div>
@@ -433,7 +478,7 @@
 <section id="skills" style="padding: 80px 20px;">
   <div style="max-width: 72rem; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 56px;">
-      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.04 — SKILL_TREE.dll</div>
+      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.05 — SKILL_TREE.dll</div>
       <h2 class="sec-title tech"><span data-i18n="skills.title_1"></span> <span class="neon-y" data-i18n="skills.title_2"></span></h2>
     </div>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
@@ -490,7 +535,7 @@
 <section id="experience" style="padding: 80px 20px; background: rgba(8,11,22,0.5);">
   <div style="max-width: 56rem; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 56px;">
-      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.05 — FIELD_LOG.rec</div>
+      <div class="sec-tag" style="margin-bottom: 8px;">// SEC.06 — FIELD_LOG.rec</div>
       <h2 class="sec-title tech"><span data-i18n="exp.title_1"></span> <span class="neon-m" data-i18n="exp.title_2"></span></h2>
     </div>
     <div style="position: relative; padding-left: 40px;" class="exp-timeline">
@@ -558,7 +603,7 @@
 <!-- ============ GÖNDEREN KURULUŞ ============ -->
 <section id="sendorg" style="padding: 64px 20px; text-align: center; position: relative; background: rgba(3,5,12,0.9); border-top: 1px solid var(--line);">
   <div style="max-width: 42rem; margin: 0 auto;">
-    <div class="sec-tag" style="margin-bottom: 12px;">// SEC.06 — ESC_PARTNER.org</div>
+    <div class="sec-tag" style="margin-bottom: 12px;">// SEC.07 — ESC_PARTNER.org</div>
     <h2 class="sec-title tech" style="margin-bottom: 24px;"><span data-i18n="sendorg.title_1"></span> <span class="neon-c" data-i18n="sendorg.title_2"></span></h2>
     <p style="font-size: 12px; line-height: 1.7; margin-bottom: 40px; color: #8fa3ae;" data-i18n="sendorg.desc"></p>
     <div class="panel neo-card" style="padding: 28px; text-align: left; font-family: 'Share Tech Mono', monospace; font-size: 12px; line-height: 2.2; color: #b8c9d3;">
@@ -578,7 +623,7 @@
 <!-- ============ İLETİŞİM ============ -->
 <section id="contact" style="padding: 64px 20px; text-align: center; position: relative; background: rgba(3,5,12,0.9); border-top: 1px solid var(--line);">
   <div style="max-width: 42rem; margin: 0 auto;">
-    <div class="sec-tag" style="margin-bottom: 12px;">// SEC.07 — UPLINK</div>
+    <div class="sec-tag" style="margin-bottom: 12px;">// SEC.08 — UPLINK</div>
     <h2 class="sec-title tech" style="margin-bottom: 24px;"><span data-i18n="contact.title_1"></span> <span class="neon-c" data-i18n="contact.title_2"></span></h2>
     <p style="font-size: 12px; line-height: 1.7; margin-bottom: 40px; color: #8fa3ae;" data-i18n="contact.desc"></p>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px;">
@@ -753,7 +798,12 @@ const translations = {
     "sendorg.label_pic": "PIC / OID NO:",
     "sendorg.label_contact": "İLETİŞİM:",
     "sendorg.label_web": "WEB:",
-    "sendorg.label_accred_link": "EU AKREDİTASYON DETAYLARI"
+    "sendorg.label_accred_link": "EU AKREDİTASYON DETAYLARI",
+    "mot.title_1": "MOTİVASYON",
+    "mot.title_2": "MEKTUBU",
+    "mot.desc": "Gönüllülük başvurum için yazdığım motivasyon mektubum.",
+    "mot.read": "MEKTUBU OKU // READ LETTER",
+    "mot.note": "Mektubun orijinal dili İngilizcedir."
   },
   de: {
     "nav.about": "ÜBER MICH",
@@ -884,7 +934,12 @@ const translations = {
     "sendorg.label_pic": "PIC / OID NR.:",
     "sendorg.label_contact": "KONTAKT:",
     "sendorg.label_web": "WEB:",
-    "sendorg.label_accred_link": "EU-AKKREDITIERUNGSDETAILS"
+    "sendorg.label_accred_link": "EU-AKKREDITIERUNGSDETAILS",
+    "mot.title_1": "MOTIVATIONS-",
+    "mot.title_2": "SCHREIBEN",
+    "mot.desc": "Mein Motivationsschreiben für meine Freiwilligenbewerbung.",
+    "mot.read": "BRIEF LESEN // READ LETTER",
+    "mot.note": "Der Brief liegt im Original auf Englisch vor."
   },
   en: {
     "nav.about": "ABOUT",
@@ -1015,7 +1070,12 @@ const translations = {
     "sendorg.label_pic": "PIC / OID NO.:",
     "sendorg.label_contact": "CONTACT:",
     "sendorg.label_web": "WEB:",
-    "sendorg.label_accred_link": "EU ACCREDITATION DETAILS"
+    "sendorg.label_accred_link": "EU ACCREDITATION DETAILS",
+    "mot.title_1": "MOTIVATION",
+    "mot.title_2": "LETTER",
+    "mot.desc": "My motivation letter for my volunteer application.",
+    "mot.read": "READ THE LETTER",
+    "mot.note": "The letter is presented in its original English wording."
   }
 };
 

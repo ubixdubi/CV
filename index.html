@@ -178,9 +178,9 @@
     </div>
     <div style="display: flex; align-items: center; gap: 8px;">
       <div style="display: flex; padding: 4px; border: 1px solid var(--line); background: rgba(0,240,255,0.05);">
-        <button onclick="switchLang('tr')" id="btn-tr" class="mono" style="padding: 2px 8px; font-size: 12px; font-weight: 700; background: var(--cyan); color: #031015; border: none; cursor: pointer;">TR</button>
+        <button onclick="switchLang('en')" id="btn-en" class="mono" style="padding: 2px 8px; font-size: 12px; font-weight: 700; background: var(--cyan); color: #031015; border: none; cursor: pointer;">EN</button>
         <button onclick="switchLang('de')" id="btn-de" class="mono" style="padding: 2px 8px; font-size: 12px; font-weight: 700; background: transparent; color: #6f8a96; border: none; cursor: pointer;">DE</button>
-        <button onclick="switchLang('en')" id="btn-en" class="mono" style="padding: 2px 8px; font-size: 12px; font-weight: 700; background: transparent; color: #6f8a96; border: none; cursor: pointer;">EN</button>
+        <button onclick="switchLang('tr')" id="btn-tr" class="mono" style="padding: 2px 8px; font-size: 12px; font-weight: 700; background: transparent; color: #6f8a96; border: none; cursor: pointer;">TR</button>
       </div>
     </div>
   </div>
@@ -555,10 +555,30 @@
   </div>
 </section>
 
+<!-- ============ GÖNDEREN KURULUŞ ============ -->
+<section id="sendorg" style="padding: 64px 20px; text-align: center; position: relative; background: rgba(3,5,12,0.9); border-top: 1px solid var(--line);">
+  <div style="max-width: 42rem; margin: 0 auto;">
+    <div class="sec-tag" style="margin-bottom: 12px;">// SEC.06 — ESC_PARTNER.org</div>
+    <h2 class="sec-title tech" style="margin-bottom: 24px;"><span data-i18n="sendorg.title_1"></span> <span class="neon-c" data-i18n="sendorg.title_2"></span></h2>
+    <p style="font-size: 12px; line-height: 1.7; margin-bottom: 40px; color: #8fa3ae;" data-i18n="sendorg.desc"></p>
+    <div class="panel neo-card" style="padding: 28px; text-align: left; font-family: 'Share Tech Mono', monospace; font-size: 12px; line-height: 2.2; color: #b8c9d3;">
+      <div><span class="neon-c" data-i18n="sendorg.label_name"></span> <b>YOUTH WORK ASSOCIATION — GENÇLİK ÇALIŞMALARI DERNEĞİ</b></div>
+      <div><span class="neon-c" data-i18n="sendorg.label_accred"></span> <b>2021-1-TR01-ESC50-098895</b> <span data-i18n="sendorg.supporting"></span></div>
+      <div><span class="neon-c" data-i18n="sendorg.label_pic"></span> <b>918857721 / E10046683</b></div>
+      <div><span class="neon-c" data-i18n="sendorg.label_contact"></span> <b><a href="mailto:info@youth.org.tr" style="color: var(--cyan); text-decoration: none;">info@youth.org.tr</a></b></div>
+      <div><span class="neon-c" data-i18n="sendorg.label_web"></span> <a href="https://www.youth.org.tr" target="_blank" style="color: var(--cyan); text-decoration: none;">www.youth.org.tr</a> / <a href="https://www.instagram.com/youthorgtr" target="_blank" style="color: var(--cyan); text-decoration: none;">instagram.com/youthorgtr</a></div>
+      <div style="margin-top: 10px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 20px;">
+        <a href="https://europa.eu/youth/volunteering/organisation/53177_en" target="_blank" style="color: var(--green); text-decoration: none;"><i class="fa-solid fa-certificate" style="margin-right: 6px;"></i><span data-i18n="sendorg.label_accred_link"></span></a>
+        <a href="https://youth.org.tr/partnership/" target="_blank" style="color: var(--green); text-decoration: none;"><i class="fa-solid fa-file-lines" style="margin-right: 6px;"></i>PIF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ İLETİŞİM ============ -->
 <section id="contact" style="padding: 64px 20px; text-align: center; position: relative; background: rgba(3,5,12,0.9); border-top: 1px solid var(--line);">
   <div style="max-width: 42rem; margin: 0 auto;">
-    <div class="sec-tag" style="margin-bottom: 12px;">// SEC.06 — UPLINK</div>
+    <div class="sec-tag" style="margin-bottom: 12px;">// SEC.07 — UPLINK</div>
     <h2 class="sec-title tech" style="margin-bottom: 24px;"><span data-i18n="contact.title_1"></span> <span class="neon-c" data-i18n="contact.title_2"></span></h2>
     <p style="font-size: 12px; line-height: 1.7; margin-bottom: 40px; color: #8fa3ae;" data-i18n="contact.desc"></p>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px;">
@@ -723,7 +743,17 @@ const translations = {
     "contact.title_1": "İLETİŞİM",
     "contact.title_2": "KANALI",
     "contact.desc": "Teknik iş birliği ortakları, web projeleri ve saha operasyonları için her zaman açığım. WhatsApp üzerinden hızlı iletişim kurabilirsiniz.",
-    "contact.location": "MALATYA / TÜRKİYE"
+    "contact.location": "MALATYA / TÜRKİYE",
+    "sendorg.title_1": "GÖNDEREN",
+    "sendorg.title_2": "KURULUŞ",
+    "sendorg.desc": "Gönderen kuruluşa ait ESC akreditasyon ve iletişim bilgileri aşağıda yer almaktadır.",
+    "sendorg.label_name": "KURULUŞ:",
+    "sendorg.label_accred": "ESC AKREDİTASYON NO:",
+    "sendorg.supporting": "(YALNIZCA DESTEKLEYİCİ)",
+    "sendorg.label_pic": "PIC / OID NO:",
+    "sendorg.label_contact": "İLETİŞİM:",
+    "sendorg.label_web": "WEB:",
+    "sendorg.label_accred_link": "EU AKREDİTASYON DETAYLARI"
   },
   de: {
     "nav.about": "ÜBER MICH",
@@ -844,7 +874,17 @@ const translations = {
     "contact.title_1": "KOMMUNIKATIONS-",
     "contact.title_2": "KANAL",
     "contact.desc": "Für technische Kooperationen, Webprojekte und Feldoperationen stehe ich jederzeit zur Verfügung. Sie können mich über WhatsApp schnell erreichen.",
-    "contact.location": "MALATYA / TÜRKEI"
+    "contact.location": "MALATYA / TÜRKEI",
+    "sendorg.title_1": "ENTSENDE-",
+    "sendorg.title_2": "ORGANISATION",
+    "sendorg.desc": "Die ESC-Akkreditierungs- und Kontaktinformationen der Entsendeorganisation finden Sie unten.",
+    "sendorg.label_name": "ORGANISATION:",
+    "sendorg.label_accred": "ESC-AKKREDITIERUNGSNR.:",
+    "sendorg.supporting": "(NUR UNTERSTÜTZEND)",
+    "sendorg.label_pic": "PIC / OID NR.:",
+    "sendorg.label_contact": "KONTAKT:",
+    "sendorg.label_web": "WEB:",
+    "sendorg.label_accred_link": "EU-AKKREDITIERUNGSDETAILS"
   },
   en: {
     "nav.about": "ABOUT",
@@ -965,11 +1005,21 @@ const translations = {
     "contact.title_1": "CONTACT",
     "contact.title_2": "CHANNEL",
     "contact.desc": "I am always available for technical collaborations, web projects, and field operations. You can reach me quickly via WhatsApp.",
-    "contact.location": "MALATYA / TURKEY"
+    "contact.location": "MALATYA / TURKEY",
+    "sendorg.title_1": "SENDING",
+    "sendorg.title_2": "ORGANISATION",
+    "sendorg.desc": "The ESC accreditation and contact details of the sending organisation are listed below.",
+    "sendorg.label_name": "ORGANISATION:",
+    "sendorg.label_accred": "ESC ACCREDITATION NO.:",
+    "sendorg.supporting": "(SUPPORTING ONLY)",
+    "sendorg.label_pic": "PIC / OID NO.:",
+    "sendorg.label_contact": "CONTACT:",
+    "sendorg.label_web": "WEB:",
+    "sendorg.label_accred_link": "EU ACCREDITATION DETAILS"
   }
 };
 
-let currentLang = 'tr';
+let currentLang = 'en';
 
 function switchLang(lang) {
   currentLang = lang;
@@ -1140,7 +1190,7 @@ function closeCertModal(e) {
 })();
 
 /* ============ BAŞLAT ============ */
-switchLang('tr');
+switchLang('en');
 </script>
 <script data-pplx-inline-edit>
 (function () {
